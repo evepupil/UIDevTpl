@@ -23,6 +23,9 @@ importers:
       '@uidevtpl/design-families':
         specifier: workspace:*
         version: link:../../packages/design-families
+      '@uidevtpl/template-quiet-grid':
+        specifier: workspace:*
+        version: link:../../packages/templates/web/react/heroui/quiet-grid
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -30,6 +33,9 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
     devDependencies:
+      '@tailwindcss/postcss':
+        specifier: 4.3.3
+        version: 4.3.3
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -42,6 +48,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 6.0.5
         version: 6.0.5(vite@8.2.1(@types/node@24.13.3)(jiti@2.7.0))
+      tailwindcss:
+        specifier: 4.3.3
+        version: 4.3.3
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -54,6 +63,9 @@ importers:
       '@radix-ui/react-dialog':
         specifier: 1.1.23
         version: 1.1.23(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@uidevtpl/catalog':
+        specifier: workspace:*
+        version: link:../../packages/catalog
       '@uidevtpl/design-families':
         specifier: workspace:*
         version: link:../../packages/design-families
@@ -95,6 +107,19 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
 
+  packages/catalog:
+    dependencies:
+      '@uidevtpl/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: 4.1.10
+        version: 4.1.10(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3)(jiti@2.7.0))
+
   packages/design-families:
     devDependencies:
       typescript:
@@ -125,6 +150,9 @@ importers:
       '@uidevtpl/schema':
         specifier: workspace:*
         version: link:../../../../../schema
+      lucide-react:
+        specifier: 1.31.0
+        version: 1.31.0(react@19.2.8)
       react:
         specifier: 19.2.8
         version: 19.2.8

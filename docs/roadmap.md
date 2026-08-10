@@ -14,4 +14,4 @@
 | <span id="m3">M3</span> | 完成第二个明显不同的视觉家族及 Web 实现 | 未开始 | M1、M2 | [第二视觉家族](./模块设计/第二视觉家族.md) | 第二家族独立通过与首个模板相同的发布门禁 |
 | <span id="m4">M4</span> | 完成公开 V1 的迁移、视觉、运营和发布验收 | 未开始 | M1、M2、M3 | [发布与验收](./模块设计/发布与验收.md) | 10 个迁移任务至少成功 9 个，无发布阻断问题，生产环境可访问 |
 
-M0 已通过基线提交 `5b9dd48` 完成，后续需求补充继续归档到同一基准。当前聚焦 M1 与 M2 的设计验证；[`prototype/index.html`](../prototype/index.html) 已按 v0 Templates 的浏览层级覆盖 Category、分享者、点赞、明暗主题、中英文与账号/投稿预留。[V1 技术架构](./模块设计/技术架构与构建.md) 已锁定 pnpm/Turborepo monorepo、Next.js 主站、Vite MPA 预览、Vercel 双 Project 与 Vercel Blob。生产应用、Schema、React / HeroUI 模板源码、构建流水线和 Vercel 部署仍待实现，因此 M1 与 M2 保持“进行中”。
+M0 已通过基线提交 `5b9dd48` 完成，后续需求补充继续归档到同一基准。当前聚焦 M1 与 M2 的实现验证；[`prototype/index.html`](../prototype/index.html) 已按 v0 Templates 的浏览层级覆盖 Category、分享者、点赞、明暗主题、中英文与账号/投稿预留。[V1 技术架构](./模块设计/技术架构与构建.md) 已锁定 pnpm/Turborepo monorepo、Next.js 主站、Vite MPA 预览、Vercel 双 Project 与 Vercel Blob。主站 P0 路由、版本化 Catalog、预览脚手架和首个模板源码边界已经接入，真实模板完整门禁、固定产物、发布流水线与 Vercel 部署仍待实现，因此 M1 与 M2 保持“进行中”。

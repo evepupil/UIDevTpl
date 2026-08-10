@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.23",
+    "@uidevtpl/catalog": "workspace:*",
     "@uidevtpl/design-families": "workspace:*",
     "@uidevtpl/schema": "workspace:*",
     "lucide-react": "1.31.0",
