@@ -3,7 +3,7 @@
 
   const copy = {
     zh: {
-      templates: "模板", useAi: "与 AI 使用", share: "分享模板", login: "登录", signup: "注册",
+      templates: "模板", share: "分享模板", login: "登录", signup: "注册",
       eyebrow: "CURATED UI SYSTEMS FOR AI BUILDERS", title: "为 AI 开发找到好界面",
       subtitle: "浏览经过打磨的组件、页面与完整模板，让 AI 从真实代码延续同一套设计。",
       search: "搜索模板、分类或视觉风格", categories: "分类", browseAll: "浏览全部", featured: "精选模板",
@@ -13,7 +13,7 @@
       categoryEmptyBody: "公开模板通过审核后会出现在这里。", preview: "查看预览", copyAi: "复制给 AI", gotIt: "知道了"
     },
     en: {
-      templates: "Templates", useAi: "Use with AI", share: "Share template", login: "Log in", signup: "Sign up",
+      templates: "Templates", share: "Share template", login: "Log in", signup: "Sign up",
       eyebrow: "CURATED UI SYSTEMS FOR AI BUILDERS", title: "Find a better interface for AI development",
       subtitle: "Browse polished components, pages, and complete templates so AI can continue one coherent design from real code.",
       search: "Search templates, categories, or visual styles", categories: "Categories", browseAll: "Browse all", featured: "Featured templates",
