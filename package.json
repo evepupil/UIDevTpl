@@ -1,0 +1,17 @@
+{
+  "name": "uidevtpl",
+  "version": "0.0.0",
+  "private": true,
+  "description": "UIDevTpl product prototype and specification workspace",
+  "scripts": {
+    "check:prototype": "node --check prototype/data.js && node --check prototype/lib.js && node --check prototype/render.js && node --check prototype/app.js && node --check prototype/preview.js && node --check prototype/browser-smoke.cjs && node --check prototype/capture-references.cjs",
+    "capture:prototype": "node prototype/capture-references.cjs",
+    "test:unit": "node --test prototype/lib.test.cjs",
+    "test:browser": "node --test prototype/browser-smoke.cjs",
+    "test:prototype": "npm run test:unit && npm run test:browser",
+    "verify": "npm run check:prototype && npm run test:prototype"
+  },
+  "devDependencies": {
+    "playwright-core": "1.54.2"
+  }
+}

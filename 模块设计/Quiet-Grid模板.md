@@ -3,9 +3,9 @@
 | 项目 | 内容 |
 | --- | --- |
 | 模块定位 | UIDevTpl 首个视觉家族及 `web/react/heroui/quiet-grid` 模板实现 |
-| 对应代码 | 计划中的 `packages/design-families/quiet-grid/`、`packages/templates/web/react/heroui/quiet-grid/` |
+| 对应代码 | `prototype/preview.html`、`prototype/preview.js`、`prototype/preview.css`；计划中的 `packages/design-families/quiet-grid/`、`packages/templates/web/react/heroui/quiet-grid/` |
 | 所属 M 里程碑 | [M2](../roadmap.md#m2) |
-| 当前状态 | 未开始 |
+| 当前状态 | 进行中 |
 | 最近更新时间 | 2026-08-10 |
 
 ## 职责与边界
@@ -35,7 +35,14 @@ Quiet Grid 家族规则
 
 ## 当前实现
 
-尚无代码和视觉稿。首个模板范围、组件基线、Showcase 题材和门禁已经写入需求与模板规范。
+已完成 Quiet Grid 的高保真视觉与交互原型：
+
+- AI 项目工作台覆盖侧栏、任务队列、指标、项目状态、搜索、筛选、完成状态和新建任务 Dialog。
+- 知识出版覆盖完整导航、期刊标题、真实主图、文章列表与内容索引。
+- 两个 Showcase 共享安静、精确、编辑感的字体、颜色、密度、边界和响应式规则。
+- 桌面与 390px 手机视口已经通过本机 Edge 截图和无横向溢出检查。
+
+当前产物用于锁定视觉方向和平台交互，尚未包含生产 React / HeroUI 组件源码、家族 JSON 契约、三类可迁移页面骨架和固定模板包。
 
 ## 验证方式
 
@@ -43,6 +50,7 @@ Quiet Grid 家族规则
 - 在 360px、768px、1024px 和 1440px 检查布局与交互。
 - 验证键盘、焦点、浮层、表单和 WCAG 2.2 AA 基线。
 - 通过受控 AI 迁移任务和至少两名评审者的风格评分。
+- 原型阶段运行 `npm run verify`，并检查 `prototype/references/quiet-grid-detail-desktop.png` 与手机参考图。
 
 ## 待扩展项
 
@@ -54,4 +62,5 @@ Quiet Grid 家族规则
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-10 | 完成 Quiet Grid 两个高保真 Showcase 原型和响应式浏览器验证 |
 | 2026-08-10 | 创建 M2 模块归档，锁定首个模板范围 |

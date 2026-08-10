@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UIDevTpl 高保真产品原型：浏览、预览并将固定版本 UI 模板迁移到现有项目。"
+    />
+    <title>UIDevTpl - 模板库原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./vendor/lucide.min.js"></script>
+    <script defer src="./data.js"></script>
+    <script defer src="./lib.js"></script>
+    <script defer src="./render.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./index.html" aria-label="UIDevTpl 模板库">
+          <span class="brand-mark" aria-hidden="true">
+            <i data-lucide="panels-top-left"></i>
+          </span>
+          <span class="brand-name">UIDevTpl</span>
+          <span class="prototype-badge">Prototype</span>
+        </a>
+
+        <nav class="main-nav" aria-label="主要导航">
+          <a class="nav-link is-active" href="./index.html">
+            <i data-lucide="layout-grid"></i>
+            模板库
+          </a>
+          <button class="nav-link" id="use-with-ai-button" type="button">
+            <i data-lucide="sparkles"></i>
+            与 AI 使用
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="icon-button"
+            id="header-search-button"
+            type="button"
+            aria-label="聚焦搜索"
+            data-tooltip="搜索模板"
+          >
+            <i data-lucide="search"></i>
+          </button>
+          <a
+            class="icon-button"
+            href="../roadmap.md"
+            aria-label="查看项目路线图"
+            data-tooltip="项目路线图"
+          >
+            <i data-lucide="milestone"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="library-view" id="library-view" aria-labelledby="library-title">
+        <div class="library-heading content-width">
+          <div>
+            <p class="section-kicker">CURATED UI SYSTEMS</p>
+            <h1 id="library-title">模板库</h1>
+          </div>
+
+          <label class="search-field" for="template-search">
+            <i data-lucide="search" aria-hidden="true"></i>
+            <input
+              id="template-search"
+              type="search"
+              autocomplete="off"
+              placeholder="搜索名称、技术栈或视觉气质"
+            />
+            <kbd>Ctrl K</kbd>
+          </label>
+        </div>
+
+        <div class="catalog-shell content-width">
+          <aside class="filter-panel" id="filter-panel" aria-label="模板筛选">
+            <div class="mobile-panel-header">
+              <strong>筛选模板</strong>
+              <button
+                class="icon-button"
+                id="close-filter-button"
+                type="button"
+                aria-label="关闭筛选"
+              >
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+
+            <div class="filter-heading">
+              <span>筛选</span>
+              <button class="text-button" id="clear-filters-button" type="button">清除</button>
+            </div>
+
+            <fieldset class="filter-group">
+              <legend>平台</legend>
+              <label class="radio-row">
+                <input type="radio" name="platform" value="web" checked />
+                <span>Web</span>
+                <span class="filter-count">2</span>
+              </label>
+              <label class="radio-row is-disabled">
+                <input type="radio" name="platform" value="desktop" disabled />
+                <span>Desktop</span>
+                <span class="planned-label">计划中</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>框架</legend>
+              <label class="radio-row">
+                <input type="radio" name="framework" value="all" checked />
+                <span>全部</span>
+                <span class="filter-count">2</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="framework" value="react" />
+                <span>React</span>
+                <span class="filter-count">2</span>
+              </label>
+              <label class="radio-row is-disabled">
+                <input type="radio" name="framework" value="vue" disabled />
+                <span>Vue</span>
+                <span class="planned-label">计划中</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>视觉气质</legend>
+              <label class="radio-row">
+                <input type="radio" name="mood" value="all" checked />
+                <span>全部</span>
+                <span class="filter-count">2</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="mood" value="calm" />
+                <span>安静克制</span>
+                <span class="filter-count">1</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="mood" value="expressive" />
+                <span>鲜明表达</span>
+                <span class="filter-count">1</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>主题</legend>
+              <label class="checkbox-row">
+                <input type="checkbox" checked disabled />
+                <span class="color-swatch color-swatch-light" aria-hidden="true"></span>
+                <span>Light</span>
+                <span class="filter-count">2</span>
+              </label>
+              <label class="checkbox-row is-disabled">
+                <input type="checkbox" disabled />
+                <span class="color-swatch color-swatch-dark" aria-hidden="true"></span>
+                <span>Dark</span>
+                <span class="filter-count">0</span>
+              </label>
+            </fieldset>
+          </aside>
+
+          <button class="filter-backdrop" id="filter-backdrop" type="button" aria-label="关闭筛选"></button>
+
+          <section class="results-panel" aria-labelledby="results-heading">
+            <div class="results-toolbar">
+              <div class="results-count">
+                <span id="results-heading">已发布模板</span>
+                <span id="result-count" aria-live="polite">2</span>
+              </div>
+
+              <div class="results-actions">
+                <button class="secondary-button mobile-filter-button" id="open-filter-button" type="button">
+                  <i data-lucide="list-filter"></i>
+                  筛选
+                </button>
+                <label class="select-control">
+                  <span class="sr-only">排序方式</span>
+                  <select id="sort-select">
+                    <option value="recommended">推荐排序</option>
+                    <option value="updated">最近更新</option>
+                    <option value="name">名称</option>
+                  </select>
+                  <i data-lucide="chevron-down" aria-hidden="true"></i>
+                </label>
+              </div>
+            </div>
+
+            <div class="template-grid" id="template-grid"></div>
+
+            <div class="empty-state" id="empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true"><i data-lucide="search-x"></i></span>
+              <h2>没有匹配的模板</h2>
+              <p>调整搜索内容或清除当前筛选条件。</p>
+              <button class="secondary-button" id="empty-clear-button" type="button">
+                <i data-lucide="rotate-ccw"></i>
+                清除筛选
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="detail-view" id="detail-view" hidden aria-labelledby="detail-title">
+        <div class="detail-shell content-width">
+          <button class="back-button" id="back-to-library-button" type="button">
+            <i data-lucide="arrow-left"></i>
+            返回模板库
+          </button>
+
+          <div class="detail-heading">
+            <div class="detail-identity">
+              <div class="detail-badges">
+                <span class="status-badge"><span></span> Active</span>
+                <span class="version-badge" id="detail-version">v1.0.0</span>
+              </div>
+              <p class="detail-id" id="detail-id"></p>
+              <h1 id="detail-title"></h1>
+              <p class="detail-summary" id="detail-summary"></p>
+            </div>
+
+            <div class="detail-actions">
+              <button class="secondary-button" id="open-component-lab-button" type="button">
+                <i data-lucide="component"></i>
+                组件实验室
+              </button>
+              <button class="secondary-button" id="open-preview-button" type="button">
+                <i data-lucide="external-link"></i>
+                独立预览
+              </button>
+              <button class="primary-button" id="copy-migration-button" type="button">
+                <i data-lucide="copy"></i>
+                复制给 AI
+              </button>
+            </div>
+          </div>
+
+          <dl class="compatibility-strip" id="compatibility-strip"></dl>
+
+          <section class="preview-workbench" aria-labelledby="preview-heading">
+            <div class="preview-toolbar">
+              <div>
+                <p class="toolbar-label" id="preview-heading">Showcase</p>
+                <div class="segmented-control" id="showcase-control" aria-label="选择 Showcase"></div>
+              </div>
+
+              <div class="preview-toolbar-actions">
+                <div class="viewport-control" id="viewport-control" aria-label="预览视口">
+                  <button
+                    class="icon-button is-active"
+                    type="button"
+                    data-viewport="desktop"
+                    aria-label="桌面视口"
+                    data-tooltip="桌面 1440"
+                  >
+                    <i data-lucide="monitor"></i>
+                  </button>
+                  <button
+                    class="icon-button"
+                    type="button"
+                    data-viewport="tablet"
+                    aria-label="平板视口"
+                    data-tooltip="平板 768"
+                  >
+                    <i data-lucide="tablet"></i>
+                  </button>
+                  <button
+                    class="icon-button"
+                    type="button"
+                    data-viewport="mobile"
+                    aria-label="手机视口"
+                    data-tooltip="手机 360"
+                  >
+                    <i data-lucide="smartphone"></i>
+                  </button>
+                  <button
+                    class="icon-button"
+                    type="button"
+                    data-viewport="fluid"
+                    aria-label="自适应视口"
+                    data-tooltip="自适应"
+                  >
+                    <i data-lucide="maximize-2"></i>
+                  </button>
+                </div>
+                <button
+                  class="icon-button"
+                  id="reset-preview-button"
+                  type="button"
+                  aria-label="重置演示"
+                  data-tooltip="重置演示"
+                >
+                  <i data-lucide="rotate-ccw"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="preview-stage viewport-desktop" id="preview-stage">
+              <iframe id="preview-frame" title="模板交互预览" loading="eager"></iframe>
+            </div>
+
+            <div class="preview-statusbar">
+              <span><span class="live-dot"></span> Live preview</span>
+              <span id="preview-size-label">1440 x 900</span>
+            </div>
+          </section>
+
+          <div class="detail-content">
+            <div class="detail-main-column">
+              <section class="content-section" aria-labelledby="included-title">
+                <div class="section-heading-row">
+                  <div>
+                    <p class="section-kicker">INCLUDED</p>
+                    <h2 id="included-title">模板内容</h2>
+                  </div>
+                  <span class="content-count" id="component-count"></span>
+                </div>
+                <div class="component-list" id="component-list"></div>
+              </section>
+
+              <section class="content-section" aria-labelledby="skeleton-title">
+                <div class="section-heading-row">
+                  <div>
+                    <p class="section-kicker">PAGE SKELETONS</p>
+                    <h2 id="skeleton-title">页面骨架</h2>
+                  </div>
+                </div>
+                <div class="skeleton-list" id="skeleton-list"></div>
+              </section>
+            </div>
+
+            <aside class="package-panel" aria-labelledby="package-title">
+              <div class="package-heading">
+                <span class="package-icon" aria-hidden="true"><i data-lucide="package-check"></i></span>
+                <div>
+                  <p class="section-kicker">FIXED ARTIFACT</p>
+                  <h2 id="package-title">固定模板包</h2>
+                </div>
+              </div>
+              <dl id="package-facts"></dl>
+              <button class="secondary-button full-width" id="copy-checksum-button" type="button">
+                <i data-lucide="fingerprint"></i>
+                复制 SHA-256
+              </button>
+              <p class="license-note"><i data-lucide="badge-check"></i> 模板代码 MIT，资产单独授权</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="app-dialog component-dialog" id="component-lab-dialog">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker">LIVE COMPONENTS</p>
+          <h2>组件实验室</h2>
+        </div>
+        <button class="icon-button" data-close-dialog type="button" aria-label="关闭组件实验室">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="lab-toolbar" role="tablist" aria-label="组件类别">
+        <button class="lab-tab is-active" type="button" data-lab-tab="actions">操作</button>
+        <button class="lab-tab" type="button" data-lab-tab="forms">表单</button>
+        <button class="lab-tab" type="button" data-lab-tab="states">状态</button>
+      </div>
+      <div class="lab-canvas" id="lab-canvas"></div>
+    </dialog>
+
+    <dialog class="app-dialog migration-dialog" id="migration-dialog">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker">AI MIGRATION TASK</p>
+          <h2>迁移指令</h2>
+        </div>
+        <button class="icon-button" data-close-dialog type="button" aria-label="关闭迁移指令">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <p class="dialog-description">浏览器未开放剪贴板权限时，可在这里手动复制完整任务。</p>
+      <textarea id="migration-text" readonly spellcheck="false"></textarea>
+      <div class="dialog-actions">
+        <button class="secondary-button" data-close-dialog type="button">取消</button>
+        <button class="primary-button" id="manual-copy-button" type="button">
+          <i data-lucide="copy"></i>
+          复制文本
+        </button>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog builder-dialog" id="guide-dialog">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker">AI MIGRATION BUILDER</p>
+          <h2>生成迁移任务</h2>
+        </div>
+        <button class="icon-button" data-close-dialog type="button" aria-label="关闭迁移任务生成器">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="builder-form">
+        <label>
+          <span>模板</span>
+          <select id="builder-template-select">
+            <option value="quiet-grid">静默网格 / Quiet Grid</option>
+            <option value="signal-canvas">信号画布 / Signal Canvas</option>
+          </select>
+        </label>
+        <label>
+          <span>固定版本</span>
+          <input id="builder-version" value="1.0.0" readonly />
+        </label>
+        <label class="builder-request-field">
+          <span>业务需求</span>
+          <textarea id="builder-request" placeholder="例如：为现有项目增加一个订阅分析工作台"></textarea>
+        </label>
+      </div>
+      <div class="dialog-actions">
+        <button class="secondary-button" data-close-dialog type="button">取消</button>
+        <button class="primary-button" id="builder-copy-button" type="button">
+          <i data-lucide="copy"></i>
+          生成并复制
+        </button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+      <i data-lucide="check"></i>
+      <span id="toast-message"></span>
+    </div>
+  </body>
+</html>

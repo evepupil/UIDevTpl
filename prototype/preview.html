@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>UIDevTpl Showcase Preview</title>
+    <link rel="stylesheet" href="./preview.css" />
+    <script defer src="./vendor/lucide.min.js"></script>
+    <script defer src="./data.js"></script>
+    <script defer src="./preview.js"></script>
+  </head>
+  <body>
+    <main id="preview-root" tabindex="-1"></main>
+    <button
+      class="demo-reset"
+      id="demo-reset"
+      type="button"
+      aria-label="重置演示"
+      data-tooltip="重置演示"
+    >
+      <i data-lucide="rotate-ccw"></i>
+    </button>
+    <div class="preview-toast" id="preview-toast" role="status" aria-live="polite"></div>
+    <dialog class="preview-dialog" id="preview-dialog">
+      <div class="preview-dialog-header">
+        <div>
+          <span class="dialog-label">NEW TASK</span>
+          <h2>创建迁移任务</h2>
+        </div>
+        <button class="preview-icon-button" type="button" data-close-preview-dialog aria-label="关闭">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <label>
+        任务名称
+        <input type="text" value="迁移分析页视觉系统" />
+      </label>
+      <label>
+        优先级
+        <select>
+          <option>普通</option>
+          <option>高</option>
+        </select>
+      </label>
+      <div class="preview-dialog-actions">
+        <button class="preview-secondary-button" type="button" data-close-preview-dialog>取消</button>
+        <button class="preview-primary-button" id="create-task-confirm" type="button">创建任务</button>
+      </div>
+    </dialog>
+  </body>
+</html>
