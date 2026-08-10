@@ -1,0 +1,13 @@
+.git
+.codegraph
+.turbo
+**/.turbo
+**/.next
+**/dist
+**/node_modules
+**/*.tsbuildinfo
+apps/preview
+docs
+packages/templates
+prototype
+tooling
