@@ -97,7 +97,7 @@ export function TemplateDetail({ entry, locale, fixedVersion, showcaseId }: Temp
             <div className="section-heading-row"><h2>{copy.artifact}</h2><FileArchive size={18} aria-hidden="true" /></div>
             <dl className="artifact-facts"><div><dt>{copy.version}</dt><dd>{entry.version}</dd></div><div><dt>{copy.artifact}</dt><dd>{formatBytes(entry.artifact.sizeBytes)}</dd></div><div><dt>SHA-256</dt><dd>{entry.artifact.sha256.slice(0, 12)}...{entry.artifact.sha256.slice(-8)}</dd></div></dl>
             <div className="artifact-notice"><ShieldCheck size={15} aria-hidden="true" /><span>{copy.internalFixture}</span></div>
-            <a className="download-placeholder" href={entry.artifact.url} aria-disabled="true" onClick={(event) => event.preventDefault()}><Download size={15} aria-hidden="true" />{locale === "zh" ? "下载入口待发布" : "Download pending release"}</a>
+            <span className="download-placeholder"><Download size={15} aria-hidden="true" />{locale === "zh" ? "下载入口待发布" : "Download pending release"}</span>
           </section>
           <section className="aside-section">
             <h2>{copy.relatedCategories}</h2>
