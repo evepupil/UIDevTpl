@@ -19,9 +19,8 @@ function findEdge() {
   return executablePath;
 }
 
-function prototypeUrl(query = "") {
-  const filePath = path.join(__dirname, "index.html");
-  return `${pathToFileURL(filePath).href}${query}`;
+function prototypeUrl() {
+  return pathToFileURL(path.join(__dirname, "index.html")).href;
 }
 
 async function assertNoHorizontalOverflow(page, label) {
@@ -36,7 +35,7 @@ async function assertNoHorizontalOverflow(page, label) {
   );
 }
 
-test("primary template selection flow works in Edge", async () => {
+test("template discovery interactions work in Edge", async () => {
   const browser = await chromium.launch({ executablePath: findEdge(), headless: true });
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const runtimeErrors = [];
@@ -45,52 +44,39 @@ test("primary template selection flow works in Edge", async () => {
 
   try {
     await page.goto(prototypeUrl());
-    await page.locator(".template-card").first().waitFor();
-    assert.equal(await page.locator(".template-card").count(), 2);
+    const libraryCards = page.locator("#template-grid .template-card");
+    await libraryCards.first().waitFor();
+    assert.equal(await libraryCards.count(), 4);
 
-    await page.locator("#template-search").fill("海报");
-    assert.equal(await page.locator(".template-card").count(), 1);
-    await page.locator("#template-search").fill("");
-    assert.equal(await page.locator(".template-card").count(), 2);
+    await page.locator("#search-input").fill("静默");
+    assert.equal(await libraryCards.count(), 1);
+    await page.locator("#search-input").fill("");
+    assert.equal(await libraryCards.count(), 4);
 
-    await page.locator('[data-open-template="quiet-grid"]').first().click();
-    await page.locator("#detail-view:not([hidden])").waitFor();
-    await page.locator("#preview-frame").waitFor();
-    assert.match(page.url(), /template=quiet-grid/);
+    const likeButton = page.locator('#template-grid [data-like="signal-launch"]');
+    assert.equal(await likeButton.getAttribute("aria-pressed"), "false");
+    await likeButton.click();
+    assert.equal(await page.locator('#template-grid [data-like="signal-launch"]').getAttribute("aria-pressed"), "true");
 
-    const workspaceFrame = page.frameLocator("#preview-frame");
-    await workspaceFrame.locator(".qg-app-shell").waitFor();
+    const initialTheme = await page.locator("html").getAttribute("data-theme");
+    await page.locator("#theme-button").click();
+    assert.notEqual(await page.locator("html").getAttribute("data-theme"), initialTheme);
 
-    await page.locator('[data-viewport="mobile"]').click();
-    await page.locator("#preview-stage.viewport-mobile").waitFor();
-    assert.equal(await page.locator("#preview-size-label").textContent(), "360 x 800");
+    await page.locator("#language-button").click();
+    assert.equal(await page.locator("html").getAttribute("lang"), "en");
+    assert.equal(await page.locator("[data-copy=login]").textContent(), "Log in");
 
-    await page.locator('[data-showcase="publication"]').click();
-    await page.frameLocator("#preview-frame").locator(".qg-publication").waitFor();
+    await page.locator("[data-placeholder=login]").click();
+    await page.locator("#placeholder-dialog[open]").waitFor();
+    await page.locator("#placeholder-dialog [data-close]").click();
 
-    await page.locator("#open-component-lab-button").click();
-    await page.locator("#component-lab-dialog[open]").waitFor();
-    await page.locator("#component-lab-dialog [data-close-dialog]").click();
+    await page.locator("#home-categories [data-category=apps]").click();
+    await page.locator("#category-view:not([hidden])").waitFor();
+    assert.equal(await page.locator("#category-template-grid .template-card").count(), 2);
 
-    await page.locator("#use-with-ai-button").click();
-    await page.locator("#guide-dialog[open]").waitFor();
-    await page.locator("#builder-template-select").selectOption("signal-canvas");
-    await page.locator("#builder-request").fill("制作产品发布页");
-    await page.evaluate(() => {
-      Object.defineProperty(navigator, "clipboard", {
-        configurable: true,
-        value: {
-          writeText(text) {
-            window.__prototypeClipboard = text;
-            return Promise.resolve();
-          }
-        }
-      });
-    });
-    await page.locator("#builder-copy-button").click();
-    const copiedMigration = await page.evaluate(() => window.__prototypeClipboard);
-    assert.match(copiedMigration, /template: web\/react\/heroui\/signal-canvas/);
-    assert.ok(copiedMigration.endsWith("制作产品发布页"));
+    await page.locator("[data-home]").first().click();
+    await page.locator('#template-grid [data-open-template="quiet-workspace"]').first().click();
+    await page.locator("#detail-dialog[open]").waitFor();
 
     assert.deepEqual(runtimeErrors, []);
   } finally {
@@ -98,22 +84,18 @@ test("primary template selection flow works in Edge", async () => {
   }
 });
 
-test("library and detail fit a 390px viewport", async () => {
+test("home and categories fit a 390px viewport", async () => {
   const browser = await chromium.launch({ executablePath: findEdge(), headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 
   try {
     await page.goto(prototypeUrl());
-    await page.locator(".template-card").first().waitFor();
-    await assertNoHorizontalOverflow(page, "library");
+    await page.locator("#template-grid .template-card").first().waitFor();
+    await assertNoHorizontalOverflow(page, "home");
 
-    await page.locator('[data-open-template="quiet-grid"]').first().click();
-    await page.locator("#detail-view:not([hidden])").waitFor();
-    await assertNoHorizontalOverflow(page, "detail");
-
-    const actionsBox = await page.locator(".detail-actions").boundingBox();
-    assert.ok(actionsBox);
-    assert.ok(actionsBox.x >= 0 && actionsBox.x + actionsBox.width <= 390);
+    await page.locator("#category-section [data-all-categories]").click();
+    await page.locator("#categories-view:not([hidden])").waitFor();
+    await assertNoHorizontalOverflow(page, "categories");
   } finally {
     await browser.close();
   }
