@@ -1,7 +1,17 @@
 import { quietGridFamily } from "@uidevtpl/design-families";
+import { AiProjectWorkspaceShowcase, QuietGridComponentLab } from "@uidevtpl/template-quiet-grid";
 
 interface PreviewShellProps {
   entry: string;
+}
+
+export function resolvePreviewEntry(pathname: string, fallback: string): string {
+  const normalized = pathname.toLocaleLowerCase();
+  if (normalized.includes("component-lab")) return "component-lab";
+  if (["/preview", "/workspace", "/publication", "/launch-room", "/field-notes"].some((segment) => normalized.includes(segment))) {
+    return "preview";
+  }
+  return fallback;
 }
 
 const entryCopy: Record<string, { eyebrow: string; title: string; detail: string }> = {
@@ -24,6 +34,9 @@ const entryCopy: Record<string, { eyebrow: string; title: string; detail: string
 
 export function PreviewShell({ entry }: PreviewShellProps) {
   const copy = entryCopy[entry] ?? entryCopy.catalog;
+
+  if (entry === "preview") return <AiProjectWorkspaceShowcase />;
+  if (entry === "component-lab") return <QuietGridComponentLab />;
 
   return (
     <main className="preview-shell">

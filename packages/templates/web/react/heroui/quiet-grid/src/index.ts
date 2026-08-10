@@ -1,6 +1,12 @@
 import { quietGridFamily } from "@uidevtpl/design-families";
 import type { TemplateManifest } from "@uidevtpl/schema";
 
+export { AiProjectWorkspaceShowcase } from "./showcases/ai-project-workspace";
+export { QuietGridComponentLab } from "./component-lab";
+export * from "./components/atoms";
+export * from "./components/composites";
+export { AppShell } from "./layouts/app-shell";
+
 export const quietGridManifest = {
   schemaVersion: 1,
   id: "web/react/heroui/quiet-grid",

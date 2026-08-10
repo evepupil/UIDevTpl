@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { PreviewShell } from "./preview-shell";
+import { PreviewShell, resolvePreviewEntry } from "./preview-shell";
 import "./styles.css";
+import "@uidevtpl/template-quiet-grid/styles.css";
 
 const rootElement = document.querySelector<HTMLDivElement>("#root");
 
@@ -11,6 +12,6 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <PreviewShell entry={rootElement.dataset.entry ?? "catalog"} />
+    <PreviewShell entry={resolvePreviewEntry(window.location.pathname, rootElement.dataset.entry ?? "catalog")} />
   </StrictMode>
 );
