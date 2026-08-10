@@ -29,7 +29,9 @@ Quiet Grid 家族规则
 ## 关键决策
 
 - 实现 ID 为 `web/react/heroui/quiet-grid`，初始版本为 `1.0.0`。
+- 首次实现以 Node.js `24.x`、React `19.x`、TypeScript `7.x`、Vite `8.x`、HeroUI `3.x` 和 Tailwind CSS `4.x` 为主版本基线。
 - 同一源码验证 Vite React SPA 和 Next.js App Router。
+- 组件实验室和两个 Showcase 使用 Vite MPA 生成固定版本生产预览。
 - npm 与 pnpm 分别完成干净项目验证。
 - 组件实验室不计入两个 Showcase 数量。
 
@@ -55,12 +57,13 @@ Quiet Grid 家族规则
 ## 待扩展项
 
 - 锁定正式展示名称和完整视觉方案。
-- 在实现开始时填写 React、HeroUI、Node.js 和样式系统版本范围。
+- 在首次实现门禁后把具体 minor、patch 和验证通过的兼容范围写入 Manifest 与锁文件。
 - V1 后评估 Dark、Vue 和桌面端实现。
 
 ## 改动历史
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-10 | 锁定首个模板的主版本基线与 Vite MPA 固定预览方式 |
 | 2026-08-10 | 完成 Quiet Grid 两个高保真 Showcase 原型和响应式浏览器验证 |
 | 2026-08-10 | 创建 M2 模块归档，锁定首个模板范围 |
