@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Code2, Download, FileArchive, Layers3, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, Code2, Download, FileArchive, Layers3, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import type { CatalogEntry, CatalogLocale } from "@uidevtpl/catalog";
 import { buildMigrationInstruction, formatBytes, formatMetric, localized } from "@uidevtpl/catalog";
@@ -29,26 +29,18 @@ export function TemplateDetail({ entry, locale, fixedVersion, showcaseId }: Temp
 
   return (
     <main className="detail-page">
-      <div className="detail-breadcrumbs"><Link href="/templates">{copy.templates}</Link><span>/</span><span>{localized(entry.name, locale)}</span></div>
-      <section className="detail-hero">
-        <div className="detail-hero-media">
-          <img src={entry.editorialImage} alt={localized(entry.name, locale)} />
-          <span className="detail-media-caption">{entry.englishName} / {entry.version}</span>
-        </div>
-        <div className="detail-hero-copy">
-          <div className="detail-status-row"><span className="template-status is-static">{copy.draft}</span><span className="detail-updated">{copy.updatedAt} {entry.updatedAt}</span></div>
-          <p className="section-eyebrow">{entry.familyVersion}</p>
+      <Link className="back-link" href="/templates"><ArrowLeft size={15} aria-hidden="true" />{copy.templates}</Link>
+      <section className="detail-heading">
+        <div className="detail-identity">
+          <div className="detail-badges"><span className="status-badge"><span />{copy.draft}</span><span className="version-badge">v{entry.version}</span></div>
+          <p className="detail-id">{entry.templateId}</p>
           <h1>{localized(entry.name, locale)}</h1>
           <p className="detail-summary">{localized(entry.summary, locale)}</p>
-          <code className="template-id">{entry.templateId}@{entry.version}</code>
-          <div className="detail-actions">
-            <CopyMigrationButton instruction={instruction} locale={locale} />
-            <a className="secondary-action" href={previewUrl} target="_blank" rel="noreferrer"><ArrowUpRight size={16} aria-hidden="true" />{copy.openPreview}</a>
-          </div>
-          <div className="detail-publisher">
-            <span className={`publisher-avatar tone-${entry.publisher.tone}`}>{entry.publisher.initials}</span>
-            <span><strong>{localized(entry.publisher.name, locale)}</strong><small>{copy[entry.publisher.kind]}</small></span>
-          </div>
+        </div>
+        <div className="detail-actions">
+          <a className="secondary-action" href={componentLabUrl} target="_blank" rel="noreferrer"><Code2 size={16} aria-hidden="true" />{copy.componentLab}</a>
+          <a className="secondary-action" href={previewUrl} target="_blank" rel="noreferrer"><ArrowUpRight size={16} aria-hidden="true" />{copy.openPreview}</a>
+          <CopyMigrationButton instruction={instruction} locale={locale} />
         </div>
       </section>
 
@@ -56,9 +48,9 @@ export function TemplateDetail({ entry, locale, fixedVersion, showcaseId }: Temp
         <div><span>{copy.platform}</span><strong>{entry.platform} / {entry.runtime}</strong></div>
         <div><span>{copy.framework}</span><strong>{entry.framework.label} {entry.framework.range}</strong></div>
         <div><span>{copy.library}</span><strong>{entry.library.label} {entry.library.range}</strong></div>
-        <div><span>{copy.theme}</span><strong>{entry.theme}</strong></div>
+        <div><span>{locale === "zh" ? "构建" : "Build"}</span><strong>{entry.buildTools.join(" + ")}</strong></div>
+        <div><span>{locale === "zh" ? "包管理器" : "Package manager"}</span><strong>{entry.packageManagers.join(" / ")}</strong></div>
         <div><span>{copy.views}</span><strong>{formatMetric(entry.metrics.views, locale)}</strong></div>
-        <div><span>{copy.likes}</span><strong>{formatMetric(entry.metrics.likes, locale)}</strong></div>
       </section>
 
       <PreviewFrame src={previewUrl} title={localized(showcase.label, locale)} locale={locale} openHref={previewUrl} />

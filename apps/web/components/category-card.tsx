@@ -13,13 +13,14 @@ interface CategoryCardProps {
 
 export function CategoryCard({ category, entries, locale }: CategoryCardProps) {
   const copy = getSiteCopy(locale);
-  const images = entries.length > 0 ? entries : [{ image: "/assets/quiet-grid-workspace.jpg" }, { image: "/assets/quiet-grid-editorial.jpg" }];
 
   return (
     <article className="category-card">
       <Link href={`/categories/${category.id}`}>
         <span className="category-mosaic" aria-hidden="true">
-          {[0, 1, 2, 3].map((index) => <span key={index} style={{ backgroundImage: `url(${images[index % images.length]!.image})` }} />)}
+          {category.representative.map((type, index) => (
+            <span className={`mini ${type}`} key={`${type}-${index}`}><i /><i /><i /><i /></span>
+          ))}
         </span>
         <span className="category-card-copy">
           <span>

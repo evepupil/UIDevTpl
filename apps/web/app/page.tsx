@@ -19,17 +19,11 @@ export default async function HomePage() {
           <p className="section-eyebrow">CURATED UI SYSTEMS FOR AI BUILDERS</p>
           <h1>{locale === "zh" ? "为 AI 开发找到好界面" : "Find a better interface for AI development"}</h1>
           <p>{locale === "zh" ? "浏览经过打磨的组件、页面与完整模板，让 AI 从真实代码延续同一套设计。" : "Browse polished components, pages, and complete templates so AI can continue one coherent design from real code."}</p>
-          <form className="hero-search" action="/templates" method="get">
+          <form className="search-box" action="/templates" method="get">
             <Search size={18} aria-hidden="true" />
             <label className="sr-only" htmlFor="home-search">{copy.searchPlaceholder}</label>
-            <input id="home-search" name="q" type="search" placeholder={copy.searchPlaceholder} />
-            <button type="submit">{copy.search}<span aria-hidden="true">↗</span></button>
+            <input id="home-search" name="q" type="search" autoComplete="off" placeholder={copy.searchPlaceholder} />
           </form>
-        </div>
-        <div className="hero-signal" aria-hidden="true">
-          <div className="hero-signal-top"><span>UIDEVTPL / 01</span><span>VISUAL SOURCE OF TRUTH</span></div>
-          <div className="hero-signal-grid"><span /><span /><span /><span /></div>
-          <div className="hero-signal-bottom"><strong>Real code.</strong><span>Fixed versions / Shared rules / Better continuity</span></div>
         </div>
       </section>
 
