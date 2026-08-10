@@ -46,6 +46,8 @@ Quiet Grid 家族规则
 
 当前产物用于锁定视觉方向和平台交互，尚未包含生产 React / HeroUI 组件源码、家族 JSON 契约、三类可迁移页面骨架和固定模板包。
 
+生产脚手架已经创建：`@uidevtpl/design-families` 提供 Quiet Grid 家族契约与 tokens，`@uidevtpl/template-quiet-grid` 提供 `web/react/heroui/quiet-grid@1.0.0` 的 Manifest 占位和源码边界。当前 Manifest 保持 `draft`，不能作为公开下载版本。
+
 ## 验证方式
 
 - 验证 TypeScript strict、构建、依赖方向、状态矩阵和模板包 Schema。
@@ -56,6 +58,9 @@ Quiet Grid 家族规则
 
 ## 待扩展项
 
+- 实现真实 React / HeroUI 原子组件、组合组件、布局、页面骨架和两个 Showcase。
+- 将家族规则整理为固定版本 JSON 和资产授权清单。
+- 在组件实验室、Vite MPA 和 Next.js 迁移验证通过后再将 Manifest 推进到 `review`。
 - 锁定正式展示名称和完整视觉方案。
 - 在首次实现门禁后把具体 minor、patch 和验证通过的兼容范围写入 Manifest 与锁文件。
 - V1 后评估 Dark、Vue 和桌面端实现。
@@ -64,6 +69,7 @@ Quiet Grid 家族规则
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-10 | 创建 Quiet Grid 视觉家族契约、tokens、Manifest 占位和 React / HeroUI 模板包边界 |
 | 2026-08-10 | 锁定首个模板的主版本基线与 Vite MPA 固定预览方式 |
 | 2026-08-10 | 完成 Quiet Grid 两个高保真 Showcase 原型和响应式浏览器验证 |
 | 2026-08-10 | 创建 M2 模块归档，锁定首个模板范围 |

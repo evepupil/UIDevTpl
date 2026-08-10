@@ -1,17 +1,28 @@
 {
   "name": "uidevtpl",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "UIDevTpl product prototype and specification workspace",
+  "description": "UIDevTpl product platform, templates, and interactive prototype",
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "pnpm@10.27.0",
   "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
     "check:prototype": "node --check prototype/data.js && node --check prototype/lib.js && node --check prototype/render.js && node --check prototype/app.js && node --check prototype/preview.js && node --check prototype/browser-smoke.cjs && node --check prototype/capture-references.cjs",
     "capture:prototype": "node prototype/capture-references.cjs",
     "test:unit": "node --test prototype/lib.test.cjs",
     "test:browser": "node --test prototype/browser-smoke.cjs",
-    "test:prototype": "npm run test:unit && npm run test:browser",
-    "verify": "npm run check:prototype && npm run test:prototype"
+    "test:prototype": "pnpm run test:unit && pnpm run test:browser",
+    "verify:scaffold": "pnpm run typecheck && pnpm run test && pnpm run build",
+    "verify": "pnpm run check:prototype && pnpm run test:prototype && pnpm run verify:scaffold"
   },
   "devDependencies": {
-    "playwright-core": "1.54.2"
+    "playwright-core": "1.54.2",
+    "turbo": "2.10.9",
+    "typescript": "7.0.2"
   }
 }
