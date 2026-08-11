@@ -5,7 +5,7 @@
 | 模块定位 | UIDevTpl 首个 SaaS 视觉家族及 `web/react/shadcn/blackline-saas` 模板实现 |
 | 对应代码 | [`packages/design-families/src/index.ts`](../../packages/design-families/src/index.ts)、[`packages/templates/web/react/shadcn/blackline-saas/`](../../packages/templates/web/react/shadcn/blackline-saas/)、[`apps/preview/src/`](../../apps/preview/src/)、[`packages/catalog/src/index.ts`](../../packages/catalog/src/index.ts) |
 | 所属 M 里程碑 | [M2](../roadmap.md#m2) |
-| 当前状态 | 进行中 |
+| 当前状态 | 已完成 |
 | 最近更新时间 | 2026-08-11 |
 
 ## 职责与边界
@@ -61,7 +61,8 @@ shadcn sidebar-07 + base-nova tokens
 - 运行模板 `typecheck`、Vitest 和 library build。
 - 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Deployments、Deployment detail、Models、Billing、Settings 和 Component Lab 通过固定深链进入同一组 MPA 产物。
 - 检查模板 library 与 Preview 产物不包含 `Calling \`require\``、`require("react")` 或其他浏览器不可用的 CommonJS 运行时调用。
-- 2026-08-11 已完成一次 Vercel Production 发布；当前改造待用新部署覆盖旧 Preview，并重新验收六个页面入口与组件实验室。
+- 2026-08-11 已完成 Vercel Production 发布，公开预览地址为 `https://preview.chaosyn.com/preview/web/react/shadcn/blackline-saas/1.0.0/overview`。
+- 2026-08-11 已在桌面端和 390px 移动端验收 Overview、Deployments、Deployment detail、Models、Billing、Settings 与 Component Lab；页面级横向溢出为零，表格保留局部横向滚动，Select、Dialog、保存反馈和状态筛选交互正常。
 - 检查 shadcn 生成文件的 hash 未因自有页面扩展发生变化。
 - 在 390px、768px 和 1440px 检查 Sidebar、表格横向滚动、指标网格和对话框焦点。
 - 后续补充 Next.js App Router 迁移、键盘焦点、WCAG 2.2 AA、固定 ZIP、Registry Item 和 SHA-256 门禁。
