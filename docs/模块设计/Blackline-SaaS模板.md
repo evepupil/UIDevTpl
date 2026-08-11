@@ -44,7 +44,8 @@ shadcn sidebar-07 + base-nova tokens
 ## 当前实现
 
 - Vite React 模板由官方 shadcn CLI 初始化，`components.json` 固定为 `base-nova`、neutral、CSS variables、Lucide。
-- `sidebar-07` 生成的 Sidebar、Breadcrumb、DropdownMenu、Collapsible、Avatar、Separator、Input、Skeleton、Tooltip 和 Sheet 已接入。
+- `sidebar-07` 生成的 Sidebar、Breadcrumb、DropdownMenu、Collapsible、Avatar、Separator、Input、Skeleton、Tooltip 和 Sheet 已接入，生成源码保持原样。
+- Showcase 需要的 Select、Dialog、Table、Label、Card、Progress 和 Badge 已通过 shadcn CLI 补齐，并只在页面组合层使用。
 - Overview 提供指标、Revenue 范围切换、Plan mix、活动搜索、CSV 导出和新建项目对话框。
 - Billing 提供套餐信息、发票表格和 CSV 导出。
 - Component Lab 覆盖按钮、输入、Loading、Empty 和操作状态。
@@ -74,6 +75,7 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-11 | 盘点 `sidebar-07` 组件并补齐 Showcase 所需的 Select、Dialog、Table、Label、Card、Progress 和 Badge；Overview、Billing 的交互控件统一走 shadcn 组件组合 |
 | 2026-08-11 | 为 Preview 启用 Tailwind v4 utility 生成和模板源码扫描，修复组件已挂载但页面缺少官方样式的问题 |
 | 2026-08-11 | 修复 Base UI 的 `use-sync-external-store` CommonJS shim 被打入 library 产物导致 Preview 白屏的问题，改为保留浏览器消费方可处理的 ESM 依赖边界 |
 | 2026-08-11 | 将 Blackline SaaS Preview 部署到 Vercel Production，并验证三个固定入口 |
