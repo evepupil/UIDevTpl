@@ -97,39 +97,41 @@ export function DeploymentsBlock({
           </Button>
         }
       />
-      <FilterBar
-        query={query}
-        onQueryChange={setQuery}
-        queryLabel="Search deployments"
-        filters={[
-          {
-            label: "Environment",
-            value: environment,
-            onChange: (value) => setEnvironment(value as "all" | Deployment["environment"]),
-            options: [
-              { value: "all", label: "All environments" },
-              { value: "Production", label: "Production" },
-              { value: "Preview", label: "Preview" },
-            ],
-          },
-          {
-            label: "Status",
-            value: status,
-            onChange: (value) => setStatus(value as "all" | DeploymentStatus),
-            options: [
-              { value: "all", label: "All statuses" },
-              { value: "Ready", label: "Ready" },
-              { value: "Building", label: "Building" },
-              { value: "Failed", label: "Failed" },
-              { value: "Canceled", label: "Canceled" },
-            ],
-          },
-        ]}
-      />
-      <div className="blackline-result-line">
-        <span>{rows.length} deployments</span>
-        <span className="blackline-muted">Atlas</span>
-      </div>
+      <section className="blackline-filter-panel" aria-label="Deployment filters">
+        <FilterBar
+          query={query}
+          onQueryChange={setQuery}
+          queryLabel="Search deployments"
+          filters={[
+            {
+              label: "Environment",
+              value: environment,
+              onChange: (value) => setEnvironment(value as "all" | Deployment["environment"]),
+              options: [
+                { value: "all", label: "All environments" },
+                { value: "Production", label: "Production" },
+                { value: "Preview", label: "Preview" },
+              ],
+            },
+            {
+              label: "Status",
+              value: status,
+              onChange: (value) => setStatus(value as "all" | DeploymentStatus),
+              options: [
+                { value: "all", label: "All statuses" },
+                { value: "Ready", label: "Ready" },
+                { value: "Building", label: "Building" },
+                { value: "Failed", label: "Failed" },
+                { value: "Canceled", label: "Canceled" },
+              ],
+            },
+          ]}
+        />
+        <div className="blackline-result-line">
+          <span>{rows.length} deployments</span>
+          <span className="blackline-muted">Atlas</span>
+        </div>
+      </section>
       <section className="blackline-section blackline-section--table" aria-label="Deployments list">
         <ResourceTable rows={rows} columns={columns} emptyLabel="No deployments found" />
       </section>

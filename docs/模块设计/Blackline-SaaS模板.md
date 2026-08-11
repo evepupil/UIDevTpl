@@ -6,7 +6,7 @@
 | 对应代码 | [`packages/design-families/src/index.ts`](../../packages/design-families/src/index.ts)、[`packages/templates/web/react/shadcn/blackline-saas/`](../../packages/templates/web/react/shadcn/blackline-saas/)、[`apps/preview/src/`](../../apps/preview/src/)、[`packages/catalog/src/index.ts`](../../packages/catalog/src/index.ts) |
 | 所属 M 里程碑 | [M2](../roadmap.md#m2) |
 | 当前状态 | 已完成 |
-| 最近更新时间 | 2026-08-11 |
+| 最近更新时间 | 2026-08-12 |
 
 ## 职责与边界
 
@@ -53,6 +53,7 @@ shadcn sidebar-07 + base-nova tokens
 - `platform-data.ts` 负责部署、模型、发票、活动和部署步骤等示例资源，以及按查询、环境和状态筛选的纯函数。
 - `BlacklineSaasShowcase` 提供 Overview，其他 Showcase 通过同一 WorkspaceApp 进入独立页面；`resource-manifest.ts` 记录可复用资源和 primitive 依赖。
 - Component Lab 覆盖按钮、状态徽标、Loading、Empty、表格和活动时间线状态；当前共有 5 项平台数据与导航纯函数单测。
+- 页面画布使用 `muted` 背景，主要业务区块使用 `card` surface 和统一圆角边框；分割线收敛到表格行、列表项和时间线内部，避免用横线承担页面层级。
 - `manifest.json` 与 `src/index.ts` 同步记录 shadcn CLI、Registry Schema、style、primitive 和 icon library。
 - `vite.config.ts` 保留官方初始化结构，仅将 Node 24 下的 `__dirname` 改为等价的 `import.meta.dirname`；Sidebar、UI primitive、导航源码和 `src/index.css` 不做自定义修改。
 
@@ -79,6 +80,7 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-12 | 将主要业务区块改为卡片 surface，收敛页面级分割线，增加画布与卡片的灰白层级，并将 Deployments 筛选栏与结果数合并为一个面板 |
 | 2026-08-11 | 将模板重构为 Shell、Patterns、Blocks 和 platform-data 资源层，新增 Deployments、Deployment detail、Models、Settings 页面，并让 Showcase 只负责组合资源 |
 | 2026-08-11 | 删除旧 Revenue / dashboard-data 示例，迁移平台筛选和导航纯函数测试，补齐 README、PARITY 和 MIGRATION 的资源复用说明 |
 | 2026-08-11 | 盘点 `sidebar-07` 组件并补齐 Showcase 所需的 Select、Dialog、Table、Label、Card、Progress 和 Badge；Overview、Billing 的交互控件统一走 shadcn 组件组合 |

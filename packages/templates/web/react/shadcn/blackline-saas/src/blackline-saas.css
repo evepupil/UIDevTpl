@@ -15,13 +15,13 @@
 .blackline-root,
 .blackline-app {
   min-height: 100svh;
-  background: var(--background);
+  background: var(--muted);
   color: var(--foreground);
 }
 
 .blackline-main {
   min-width: 0;
-  background: var(--background);
+  background: var(--muted);
 }
 
 .blackline-header {
@@ -30,6 +30,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  background: var(--card);
   border-bottom: 1px solid var(--border);
   padding: 0.625rem 1.5rem;
 }
@@ -143,8 +144,11 @@
 .blackline-summary-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 0.25rem;
 }
 
 .blackline-summary-strip__item {
@@ -152,12 +156,8 @@
   min-width: 0;
   flex-direction: column;
   gap: 0.25rem;
-  border-right: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
-}
-
-.blackline-summary-strip__item:last-child {
-  border-right: 0;
 }
 
 .blackline-summary-strip__item > span,
@@ -187,13 +187,10 @@
 
 .blackline-section {
   min-width: 0;
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-}
-
-.blackline-section--table {
-  border-top: 0;
-  padding-top: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.1rem 1.1rem 1.2rem;
 }
 
 .blackline-section__header {
@@ -214,7 +211,6 @@
 .blackline-section__footer {
   display: flex;
   justify-content: flex-start;
-  border-top: 1px solid var(--border);
   margin-top: 1rem;
   padding-top: 0.85rem;
 }
@@ -342,8 +338,15 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.7rem;
+  padding: 0.1rem 0;
+}
+
+.blackline-filter-panel {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1rem 1.1rem;
 }
 
 .blackline-table-wrap {
@@ -645,8 +648,10 @@
 }
 
 .blackline-settings-section {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.1rem 1.1rem 1.2rem;
 }
 
 .blackline-form-grid {
@@ -730,7 +735,7 @@
 
 .blackline-lab {
   min-height: 100svh;
-  background: var(--background);
+  background: var(--muted);
   padding: 2rem;
 }
 
@@ -742,9 +747,11 @@
 }
 
 .blackline-lab__section {
-  border-top: 1px solid var(--border);
-  margin-top: 2rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1rem 1.1rem 1.1rem;
 }
 
 .blackline-lab__row {
@@ -781,13 +788,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .blackline-summary-strip__item:nth-child(2) {
-    border-right: 0;
-  }
-
-  .blackline-summary-strip__item:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--border);
-  }
 }
 
 @media (max-width: 640px) {
