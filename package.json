@@ -12,7 +12,7 @@
     "dev": "turbo run dev --parallel",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "check:prototype": "node --check prototype/app.js && node --check prototype/browser-smoke.cjs",
+    "check:prototype": "node --check prototype/data.js && node --check prototype/app.js && node --check prototype/browser-smoke.cjs",
     "test:browser": "node --test prototype/browser-smoke.cjs",
     "test:prototype": "pnpm run test:browser",
     "verify:scaffold": "pnpm run typecheck && pnpm run test && pnpm run build",
