@@ -54,6 +54,7 @@ shadcn sidebar-07 + base-nova tokens
 
 - 运行模板 `typecheck`、Vitest 和 library build。
 - 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Billing 和 Component Lab 进入同一组 MPA 产物。
+- 2026-08-11 发布 Vercel Production 部署 `dpl_CPcD18TNkzr63VaU2Z8dq2uBnKHH`，`preview.chaosyn.com` 的 Overview、Billing 和 Component Lab 深链均返回 HTTP 200，页面标题均为 Blackline SaaS。
 - 检查 shadcn 生成文件的 hash 未因自有页面扩展发生变化。
 - 在 390px、768px 和 1440px 检查 Sidebar、表格横向滚动、指标网格和对话框焦点。
 - 后续补充 Next.js App Router 迁移、键盘焦点、WCAG 2.2 AA、固定 ZIP、Registry Item 和 SHA-256 门禁。
@@ -70,5 +71,6 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-11 | 将 Blackline SaaS Preview 部署到 Vercel Production，并验证三个固定入口 |
 | 2026-08-11 | 用官方 `sidebar-07` 和 `base-nova` 初始化 Blackline SaaS，完成 Overview、Billing、Component Lab、Preview 和 Catalog 接入 |
 | 2026-08-11 | 将 M2 模板目标从 Quiet Grid 调整为 Blackline SaaS，记录官方生成源码保持不变的边界 |
