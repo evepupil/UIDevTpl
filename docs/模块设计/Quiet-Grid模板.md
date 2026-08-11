@@ -45,7 +45,7 @@ Quiet Grid 家族契约与 tokens
 - AI 项目工作台覆盖深色工作区导航、四项指标、任务筛选、完成状态、任务 Modal、Toast、项目图片、里程碑进度和活动列表。
 - 组件实验室覆盖按钮状态、徽标、头像、表单校验、Switch、Checkbox、Empty、Error、Loading 和 Tabs。
 - Vite MPA 提供 `/preview/`、`/component-lab/` 和基础 Catalog 三个入口；预览应用已接入 Tailwind v4 PostCSS 处理链，HeroUI 样式可正常构建。
-- 应用 Showcase 已补齐暖白画布、深色侧栏、编辑感标题、数据微型趋势条、任务行层级和项目状态信息；桌面与 390px 手机视口仍需对本轮改造做线上截图复核。
+- 应用 Showcase 已补齐暖白画布、深色侧栏、编辑感标题、数据微型趋势条、任务行层级和项目状态信息；新版 Preview 已通过桌面与 390px 手机线上截图、无横向溢出和任务完成交互复核。
 
 生产脚手架已经创建：`@uidevtpl/design-families` 提供 Quiet Grid 家族契约与 tokens，`@uidevtpl/template-quiet-grid` 提供 `web/react/heroui/quiet-grid@1.0.0` 的 Manifest 占位、源码边界和样式入口。当前 Manifest 保持 `draft`，不能作为公开下载版本。
 
@@ -70,6 +70,7 @@ Quiet Grid 家族契约与 tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-11 | 将新版应用工作台部署到 `preview.chaosyn.com`，完成桌面、390px 手机和任务完成交互线上验收 |
 | 2026-08-11 | 重做应用工作台 Showcase 的视觉层级、导航对比、指标趋势、任务队列与项目脉搏区，补齐移动端两列指标节奏 |
 | 2026-08-10 | 创建 Quiet Grid 视觉家族契约、tokens、Manifest 占位和 React / HeroUI 模板包边界 |
 | 2026-08-10 | 锁定首个模板的主版本基线与 Vite MPA 固定预览方式 |
