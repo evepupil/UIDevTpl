@@ -63,6 +63,7 @@ shadcn sidebar-07 + base-nova tokens
 - 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Deployments、Deployment detail、Models、Billing、Settings 和 Component Lab 通过固定深链进入同一组 MPA 产物。
 - 检查模板 library 与 Preview 产物不包含 `Calling \`require\``、`require("react")` 或其他浏览器不可用的 CommonJS 运行时调用。
 - 2026-08-11 已完成 Vercel Production 发布，公开预览地址为 `https://preview.chaosyn.com/preview/web/react/shadcn/blackline-saas/1.0.0/overview`。
+- 2026-08-12 已重新部署卡片层级改造，并在 1440px、768px、390px 验收七个固定入口；页面级横向溢出为零，表格仅在自身容器内滚动，公开预览控制台无应用错误。
 - 2026-08-11 已在桌面端和 390px 移动端验收 Overview、Deployments、Deployment detail、Models、Billing、Settings 与 Component Lab；页面级横向溢出为零，表格保留局部横向滚动，Select、Dialog、保存反馈和状态筛选交互正常。
 - 检查 shadcn 生成文件的 hash 未因自有页面扩展发生变化。
 - 在 390px、768px 和 1440px 检查 Sidebar、表格横向滚动、指标网格和对话框焦点。
