@@ -39,6 +39,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: 4.3.3
         version: 4.3.3
+      '@tailwindcss/vite':
+        specifier: 4.3.3
+        version: 4.3.3(vite@8.2.1(@types/node@24.13.3)(jiti@2.7.0))
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -195,6 +198,9 @@ importers:
       tw-animate-css:
         specifier: 1.4.0
         version: 1.4.0
+      use-sync-external-store:
+        specifier: 1.6.0
+        version: 1.6.0(react@19.2.8)
     devDependencies:
       '@tailwindcss/vite':
         specifier: 4.3.3

@@ -20,7 +20,15 @@ export default defineConfig({
       fileName: "index",
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", "react-dom/client"],
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "react-dom/client",
+        "use-sync-external-store",
+        "use-sync-external-store/shim",
+        "use-sync-external-store/shim/with-selector",
+      ],
     },
   },
 })

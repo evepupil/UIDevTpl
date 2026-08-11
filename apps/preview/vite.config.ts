@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from "node:url";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -15,12 +16,13 @@ export default defineConfig({
         }
 
         return {
-          code: code.replace('@import "@fontsource-variable/geist";\n', ""),
+          code: code.replace('@import "@fontsource-variable/geist";\n', '@source "./";\n'),
           map: null
         };
       }
     },
-    react()
+    react(),
+    tailwindcss()
   ],
   build: {
     emptyOutDir: true,

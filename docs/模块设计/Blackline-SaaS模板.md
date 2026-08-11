@@ -37,6 +37,8 @@ shadcn sidebar-07 + base-nova tokens
 - 模板库构建输出到 `dist`，独立应用演示构建输出到 `dist-app`，避免 Vite 应用构建清空供 Preview 导入的库产物。
 - Preview 直接声明 Geist 依赖，并在 Vite 内存适配层移除 workspace 包中的重复字体导入；模板主题与字体源码保持原样。
 - Preview 的 library build 使用模板自己的 `@/` alias，TypeScript 检查在 Preview tsconfig 中映射同一固定源码目录；主站不直接导入模板运行时。
+- 模板 library build 将 `use-sync-external-store` 及其 shim 子路径作为外部 ESM 依赖，避免 Base UI 的 CommonJS shim 被带入浏览器产物并在运行时调用 `require`。
+- Preview 构建启用 Tailwind v4 Vite 插件，并通过内存适配层为模板 CSS 指定源码扫描目录，保证 `sidebar-07` 生成的 utility class 进入最终 CSS，同时不修改官方主题文件。
 - `BlacklineComponentLab` 不计入两个 Showcase；三个页面骨架和正式发布产物仍未完成。
 
 ## 当前实现
@@ -54,7 +56,8 @@ shadcn sidebar-07 + base-nova tokens
 
 - 运行模板 `typecheck`、Vitest 和 library build。
 - 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Billing 和 Component Lab 进入同一组 MPA 产物。
-- 2026-08-11 发布 Vercel Production 部署 `dpl_CPcD18TNkzr63VaU2Z8dq2uBnKHH`，`preview.chaosyn.com` 的 Overview、Billing 和 Component Lab 深链均返回 HTTP 200，页面标题均为 Blackline SaaS。
+- 检查模板 library 与 Preview 产物不包含 `Calling \`require\``、`require("react")` 或其他浏览器不可用的 CommonJS 运行时调用。
+- 2026-08-11 发布 Vercel Production 部署 `dpl_5zZy7Ts47EzEYxZ2yZ91bAiaRx5F`；`preview.chaosyn.com` 的 Overview、Billing 和 `/component-lab` 均有可见内容，控制台无错误，Overview 与 Component Lab 的截图确认 Sidebar、按钮、指标卡和输入框样式已加载。
 - 检查 shadcn 生成文件的 hash 未因自有页面扩展发生变化。
 - 在 390px、768px 和 1440px 检查 Sidebar、表格横向滚动、指标网格和对话框焦点。
 - 后续补充 Next.js App Router 迁移、键盘焦点、WCAG 2.2 AA、固定 ZIP、Registry Item 和 SHA-256 门禁。
@@ -71,6 +74,8 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-11 | 为 Preview 启用 Tailwind v4 utility 生成和模板源码扫描，修复组件已挂载但页面缺少官方样式的问题 |
+| 2026-08-11 | 修复 Base UI 的 `use-sync-external-store` CommonJS shim 被打入 library 产物导致 Preview 白屏的问题，改为保留浏览器消费方可处理的 ESM 依赖边界 |
 | 2026-08-11 | 将 Blackline SaaS Preview 部署到 Vercel Production，并验证三个固定入口 |
 | 2026-08-11 | 用官方 `sidebar-07` 和 `base-nova` 初始化 Blackline SaaS，完成 Overview、Billing、Component Lab、Preview 和 Catalog 接入 |
 | 2026-08-11 | 将 M2 模板目标从 Quiet Grid 调整为 Blackline SaaS，记录官方生成源码保持不变的边界 |
