@@ -13,9 +13,19 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { GalleryVerticalEndIcon, AudioLinesIcon, TerminalIcon, TerminalSquareIcon, BotIcon, BookOpenIcon, Settings2Icon, FrameIcon, PieChartIcon, MapIcon } from "lucide-react"
+import {
+  BotIcon,
+  BoxIcon,
+  CloudIcon,
+  FolderGit2Icon,
+  GalleryVerticalEndIcon,
+  LayoutDashboardIcon,
+  Settings2Icon,
+  TerminalIcon,
+} from "lucide-react"
 
-// This is sample data.
+import type { PlatformPage } from "../lib/platform-data"
+
 const data = {
   user: {
     name: "shadcn",
@@ -33,157 +43,119 @@ const data = {
     },
     {
       name: "Acme Corp.",
-      logo: (
-        <AudioLinesIcon
-        />
-      ),
+      logo: <CloudIcon />,
       plan: "Startup",
     },
     {
       name: "Evil Corp.",
-      logo: (
-        <TerminalIcon
-        />
-      ),
+      logo: <TerminalIcon />,
       plan: "Free",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: (
-        <TerminalSquareIcon
-        />
-      ),
-      isActive: true,
+      title: "Workspace",
+      url: "#overview",
+      icon: <LayoutDashboardIcon />,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Overview",
+          url: "#overview",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Deployments",
+          url: "#deployments",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Activity",
+          url: "#overview",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: (
-        <BotIcon
-        />
-      ),
+      title: "Platform",
+      url: "#models",
+      icon: <CloudIcon />,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Models",
+          url: "#models",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Domains",
+          url: "#settings",
         },
         {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: (
-        <BookOpenIcon
-        />
-      ),
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Usage",
+          url: "#billing",
         },
       ],
     },
     {
       title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
+      url: "#settings",
+      icon: <Settings2Icon />,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Project settings",
+          url: "#settings",
         },
         {
           title: "Team",
-          url: "#",
+          url: "#settings",
         },
         {
           title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          url: "#billing",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: (
-        <FrameIcon
-        />
-      ),
+      name: "Atlas",
+      url: "#overview",
+      icon: <FolderGit2Icon />,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: (
-        <PieChartIcon
-        />
-      ),
+      name: "Northstar",
+      url: "#models",
+      icon: <BotIcon />,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: (
-        <MapIcon
-        />
-      ),
+      name: "Edge API",
+      url: "#deployments",
+      icon: <BoxIcon />,
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  activePage = "overview",
+  onNavigate,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & {
+  activePage?: PlatformPage
+  onNavigate?: (page: PlatformPage) => void
+}) {
+  const activeNav = activePage === "deployment-detail" ? "deployments" : activePage
+  const navMain = data.navMain.map((item) => ({
+    ...item,
+    isActive: item.url === `#${activeNav}` || item.items.some((subItem) => subItem.url === `#${activeNav}`),
+    items: item.items.map((subItem) => ({
+      ...subItem,
+      isActive: subItem.url === `#${activeNav}`,
+    })),
+  }))
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={navMain} onNavigate={onNavigate} />
+        <NavProjects projects={data.projects} onNavigate={onNavigate} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

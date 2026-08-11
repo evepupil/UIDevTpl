@@ -14,9 +14,11 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { ChevronRightIcon } from "lucide-react"
+import type { PlatformPage } from "../lib/platform-data"
 
 export function NavMain({
   items,
+  onNavigate,
 }: {
   items: {
     title: string
@@ -26,9 +28,16 @@ export function NavMain({
     items?: {
       title: string
       url: string
+      isActive?: boolean
     }[]
   }[]
+  onNavigate?: (page: PlatformPage) => void
 }) {
+  function handleNavigate(url: string) {
+    const page = url.replace(/^#/, "") as PlatformPage
+    onNavigate?.(page)
+  }
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -41,7 +50,13 @@ export function NavMain({
             render={<SidebarMenuItem />}
           >
             <CollapsibleTrigger
-              render={<SidebarMenuButton tooltip={item.title} />}
+              render={
+                <SidebarMenuButton
+                  tooltip={item.title}
+                  isActive={item.isActive}
+                  onClick={() => handleNavigate(item.url)}
+                />
+              }
             >
               {item.icon}
               <span>{item.title}</span>
@@ -51,7 +66,10 @@ export function NavMain({
               <SidebarMenuSub>
                 {item.items?.map((subItem) => (
                   <SidebarMenuSubItem key={subItem.title}>
-                    <SidebarMenuSubButton render={<a href={subItem.url} />}>
+                    <SidebarMenuSubButton
+                      isActive={subItem.isActive}
+                      render={<a href={subItem.url} onClick={() => handleNavigate(subItem.url)} />}
+                    >
                       <span>{subItem.title}</span>
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>

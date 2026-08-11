@@ -17,15 +17,18 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { MoreHorizontalIcon, FolderIcon, ArrowRightIcon, Trash2Icon } from "lucide-react"
+import type { PlatformPage } from "../lib/platform-data"
 
 export function NavProjects({
   projects,
+  onNavigate,
 }: {
   projects: {
     name: string
     url: string
     icon: React.ReactNode
   }[]
+  onNavigate?: (page: PlatformPage) => void
 }) {
   const { isMobile } = useSidebar()
   return (
@@ -34,7 +37,7 @@ export function NavProjects({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton render={<a href={item.url} />}>
+            <SidebarMenuButton render={<a href={item.url} onClick={() => onNavigate?.(item.url.replace(/^#/, "") as PlatformPage)} />}>
               {item.icon}
               <span>{item.name}</span>
             </SidebarMenuButton>

@@ -12,7 +12,8 @@
 
 - 定义 Blackline SaaS 的灰、黑、白 token、密度、圆角和数据工作台构图。
 - 以官方 shadcn `sidebar-07` 为 Sidebar、折叠、导航和操作状态的源码基线。
-- 提供 Overview、Billing 两个完整 Showcase 和独立组件实验室。
+- 提供 Overview、Deployments、Deployment detail、Models、Billing、Settings 六个可独立入口，以及组件实验室。
+- 把可复用资源拆为 Shell、Patterns、Blocks 和平台数据契约；示例页面只负责组合这些资源。
 - 提供 Web / React / shadcn/ui 独立源码、版本化 Manifest、迁移说明和固定 Preview 入口。
 - 模板层负责页面组合和示例数据；主站目录、发布产物和 Blob 由模板平台模块负责。
 
@@ -21,8 +22,9 @@
 ```text
 shadcn sidebar-07 + base-nova tokens
   -> 官方 Sidebar / UI 源码
-  -> Blackline SaaS 页面组合与数据纯函数
-  -> Overview / Billing Showcase 与 Component Lab
+  -> Workspace Shell + Patterns + Blocks
+  -> platform-data 资源契约与页面组合
+  -> Overview / Deployments / Models / Billing / Settings + Component Lab
   -> Vite library build + Preview MPA
   -> Manifest、Catalog、迁移说明和后续固定产物
 ```
@@ -39,26 +41,27 @@ shadcn sidebar-07 + base-nova tokens
 - Preview 的 library build 使用模板自己的 `@/` alias，TypeScript 检查在 Preview tsconfig 中映射同一固定源码目录；主站不直接导入模板运行时。
 - 模板 library build 将 `use-sync-external-store` 及其 shim 子路径作为外部 ESM 依赖，避免 Base UI 的 CommonJS shim 被带入浏览器产物并在运行时调用 `require`。
 - Preview 构建启用 Tailwind v4 Vite 插件，并通过内存适配层为模板 CSS 指定源码扫描目录，保证 `sidebar-07` 生成的 utility class 进入最终 CSS，同时不修改官方主题文件。
-- `BlacklineComponentLab` 不计入两个 Showcase；三个页面骨架和正式发布产物仍未完成。
+- `BlacklineComponentLab` 是独立验收入口，不计入业务页面；业务页面通过 `BlacklineSaasShowcase` 和各页面 Showcase 复用同一套资源。
 
 ## 当前实现
 
 - Vite React 模板由官方 shadcn CLI 初始化，`components.json` 固定为 `base-nova`、neutral、CSS variables、Lucide。
 - `sidebar-07` 生成的 Sidebar、Breadcrumb、DropdownMenu、Collapsible、Avatar、Separator、Input、Skeleton、Tooltip 和 Sheet 已接入，生成源码保持原样。
 - Showcase 需要的 Select、Dialog、Table、Label、Card、Progress 和 Badge 已通过 shadcn CLI 补齐，并只在页面组合层使用。
-- Overview 提供指标、Revenue 范围切换、Plan mix、活动搜索、CSV 导出和新建项目对话框。
-- Billing 提供套餐信息、发票表格和 CSV 导出。
-- Component Lab 覆盖按钮、输入、Loading、Empty 和操作状态。
-- `dashboard-data.ts` 负责活动过滤、汇总和金额格式化，并有 3 项 Vitest 单测。
+- `src/components/patterns/` 提供 WorkspaceShell、PageHeader、FilterBar、ResourceTable、StatusBadge、SummaryStrip、ActivityTimeline 和 EmptyState。
+- `src/components/blocks/` 提供项目概览、部署列表、部署详情、模型列表、账单和设置六个可组合业务块。
+- `platform-data.ts` 负责部署、模型、发票、活动和部署步骤等示例资源，以及按查询、环境和状态筛选的纯函数。
+- `BlacklineSaasShowcase` 提供 Overview，其他 Showcase 通过同一 WorkspaceApp 进入独立页面；`resource-manifest.ts` 记录可复用资源和 primitive 依赖。
+- Component Lab 覆盖按钮、状态徽标、Loading、Empty、表格和活动时间线状态；当前共有 5 项平台数据与导航纯函数单测。
 - `manifest.json` 与 `src/index.ts` 同步记录 shadcn CLI、Registry Schema、style、primitive 和 icon library。
 - `vite.config.ts` 保留官方初始化结构，仅将 Node 24 下的 `__dirname` 改为等价的 `import.meta.dirname`；Sidebar、UI primitive、导航源码和 `src/index.css` 不做自定义修改。
 
 ## 验证方式
 
 - 运行模板 `typecheck`、Vitest 和 library build。
-- 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Billing 和 Component Lab 进入同一组 MPA 产物。
+- 运行 `pnpm --filter @uidevtpl/preview... build`，确认 Overview、Deployments、Deployment detail、Models、Billing、Settings 和 Component Lab 通过固定深链进入同一组 MPA 产物。
 - 检查模板 library 与 Preview 产物不包含 `Calling \`require\``、`require("react")` 或其他浏览器不可用的 CommonJS 运行时调用。
-- 2026-08-11 发布 Vercel Production 部署 `dpl_5zZy7Ts47EzEYxZ2yZ91bAiaRx5F`；`preview.chaosyn.com` 的 Overview、Billing 和 `/component-lab` 均有可见内容，控制台无错误，Overview 与 Component Lab 的截图确认 Sidebar、按钮、指标卡和输入框样式已加载。
+- 2026-08-11 已完成一次 Vercel Production 发布；当前改造待用新部署覆盖旧 Preview，并重新验收六个页面入口与组件实验室。
 - 检查 shadcn 生成文件的 hash 未因自有页面扩展发生变化。
 - 在 390px、768px 和 1440px 检查 Sidebar、表格横向滚动、指标网格和对话框焦点。
 - 后续补充 Next.js App Router 迁移、键盘焦点、WCAG 2.2 AA、固定 ZIP、Registry Item 和 SHA-256 门禁。
@@ -75,6 +78,8 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-11 | 将模板重构为 Shell、Patterns、Blocks 和 platform-data 资源层，新增 Deployments、Deployment detail、Models、Settings 页面，并让 Showcase 只负责组合资源 |
+| 2026-08-11 | 删除旧 Revenue / dashboard-data 示例，迁移平台筛选和导航纯函数测试，补齐 README、PARITY 和 MIGRATION 的资源复用说明 |
 | 2026-08-11 | 盘点 `sidebar-07` 组件并补齐 Showcase 所需的 Select、Dialog、Table、Label、Card、Progress 和 Badge；Overview、Billing 的交互控件统一走 shadcn 组件组合 |
 | 2026-08-11 | 为 Preview 启用 Tailwind v4 utility 生成和模板源码扫描，修复组件已挂载但页面缺少官方样式的问题 |
 | 2026-08-11 | 修复 Base UI 的 `use-sync-external-store` CommonJS shim 被打入 library 产物导致 Preview 白屏的问题，改为保留浏览器消费方可处理的 ESM 依赖边界 |

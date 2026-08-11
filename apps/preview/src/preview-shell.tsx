@@ -1,5 +1,13 @@
 import { blacklineSaasFamily } from "@uidevtpl/design-families";
-import { BlacklineBillingShowcase, BlacklineComponentLab, BlacklineSaasShowcase } from "@uidevtpl/template-blackline-saas";
+import {
+  BlacklineBillingShowcase,
+  BlacklineComponentLab,
+  BlacklineDeploymentDetailShowcase,
+  BlacklineDeploymentsShowcase,
+  BlacklineModelsShowcase,
+  BlacklineSaasShowcase,
+  BlacklineSettingsShowcase,
+} from "@uidevtpl/template-blackline-saas";
 
 interface PreviewShellProps {
   entry: string;
@@ -8,6 +16,10 @@ interface PreviewShellProps {
 export function resolvePreviewEntry(pathname: string, fallback: string): string {
   const normalized = pathname.toLocaleLowerCase();
   if (normalized.includes("component-lab")) return "component-lab";
+  if (normalized.includes("deployment-detail")) return "deployment-detail";
+  if (normalized.includes("/deployments")) return "deployments";
+  if (normalized.includes("/models")) return "models";
+  if (normalized.includes("/settings")) return "settings";
   if (normalized.includes("/billing")) return "billing";
   if (["/preview", "/overview", "/workspace"].some((segment) => normalized.includes(segment))) {
     return "preview";
@@ -28,6 +40,22 @@ const entryCopy: Record<string, { eyebrow: string; title: string }> = {
     eyebrow: "Blackline SaaS",
     title: "Component lab"
   },
+  deployments: {
+    eyebrow: "Blackline SaaS",
+    title: "Deployments"
+  },
+  "deployment-detail": {
+    eyebrow: "Blackline SaaS",
+    title: "Deployment detail"
+  },
+  models: {
+    eyebrow: "Blackline SaaS",
+    title: "Models"
+  },
+  settings: {
+    eyebrow: "Blackline SaaS",
+    title: "Settings"
+  },
   billing: {
     eyebrow: "Blackline SaaS",
     title: "Billing"
@@ -38,6 +66,10 @@ export function PreviewShell({ entry }: PreviewShellProps) {
   const copy = entryCopy[entry] ?? entryCopy.catalog;
 
   if (entry === "preview") return <BlacklineSaasShowcase />;
+  if (entry === "deployments") return <BlacklineDeploymentsShowcase />;
+  if (entry === "deployment-detail") return <BlacklineDeploymentDetailShowcase />;
+  if (entry === "models") return <BlacklineModelsShowcase />;
+  if (entry === "settings") return <BlacklineSettingsShowcase />;
   if (entry === "billing") return <BlacklineBillingShowcase />;
   if (entry === "component-lab") return <BlacklineComponentLab />;
 

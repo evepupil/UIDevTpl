@@ -2,8 +2,19 @@ import type { TemplateManifest } from "@uidevtpl/schema"
 
 import { blacklineSaasFamily } from "@uidevtpl/design-families"
 
-export { BlacklineBillingShowcase, BlacklineComponentLab, BlacklineSaasShowcase } from "./blackline-saas"
+export {
+  BlacklineBillingShowcase,
+  BlacklineComponentLab,
+  BlacklineDeploymentDetailShowcase,
+  BlacklineDeploymentsShowcase,
+  BlacklineModelsShowcase,
+  BlacklineSaasShowcase,
+  BlacklineSettingsShowcase,
+} from "./blackline-saas"
 export { blacklineSaasFamily }
+export * from "./components/blocks"
+export * from "./components/patterns"
+export { blacklineSaasResources } from "./resource-manifest"
 
 export const blacklineSaasManifest = {
   schemaVersion: 1,

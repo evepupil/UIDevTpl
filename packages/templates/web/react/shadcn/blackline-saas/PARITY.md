@@ -7,7 +7,8 @@
 | Theme | `components.json` and `src/index.css` | `base-nova`, neutral, CSS variables |
 | Primitive | `@base-ui/react` | `1.7.0` |
 | Icons | `lucide-react` | `1.31.0` |
-| Showcase | `src/blackline-saas.tsx` | SaaS overview with component-backed range select, table, cards, badges, progress bars, dialog, filter, export, and responsive states |
-| Component lab | `src/blackline-saas.tsx` | Buttons, loading, empty, input, and action states |
+| Resource layer | `src/components/patterns/`, `src/components/blocks/`, `src/lib/platform-data.ts` | Shell, header, filters, table, status, summary, timeline, empty state, and six SaaS blocks are exported as reusable resources |
+| Showcase | `src/blackline-saas.tsx` | Overview, deployments, deployment detail, models, billing, settings, and component lab compose the resource layer; page navigation uses hash routes |
+| Component lab | `src/blackline-saas.tsx` | Buttons, status badges, loading, empty, table, and activity timeline states |
 
-The generated shadcn files are intentionally kept outside the custom composition layer. A later template version must regenerate them instead of editing this version in place.
+The generated shadcn files stay outside the custom composition layer. A later template version must regenerate them instead of editing this version in place. `resource-manifest.ts` is the catalog of reusable resources; showcase data is replaceable through `platform-data.ts`.
