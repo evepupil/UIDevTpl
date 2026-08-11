@@ -226,6 +226,8 @@ function RevenueSection({
   onRangeChange: (range: RevenueRange) => void
 }) {
   const values = revenueSeries[range]
+  const rangeLabel =
+    revenueRanges.find((option) => option.value === range)?.label ?? range
   return (
     <section className="blackline-section" aria-labelledby="revenue-title">
       <div className="blackline-section__header">
@@ -241,7 +243,7 @@ function RevenueSection({
             className="blackline-select"
             aria-label="Date range"
           >
-            <SelectValue />
+            <SelectValue>{rangeLabel}</SelectValue>
           </SelectTrigger>
           <SelectContent align="end">
             {revenueRanges.map((option) => (
