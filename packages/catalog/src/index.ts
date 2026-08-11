@@ -135,11 +135,11 @@ export const catalogCategories: readonly CatalogCategory[] = [
   }
 ];
 
-const quietGridManifest = {
-  file: "uidevtpl-web-react-heroui-quiet-grid-1.0.0.zip",
-  url: "https://uidevtpl.example/artifacts/web/react/heroui/quiet-grid/1.0.0/template.zip",
-  sizeBytes: 1843200,
-  sha256: "7d3f50a97439237c6b7bd6245af5079b0e14eb96ce72d0e1e578e8fb8d6f3a21"
+const blacklineSaasManifest = {
+  file: "uidevtpl-web-react-shadcn-blackline-saas-1.0.0.zip",
+  url: "https://uidevtpl.example/artifacts/web/react/shadcn/blackline-saas/1.0.0/template.zip",
+  sizeBytes: 2457600,
+  sha256: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
 };
 
 const signalCanvasManifest = {
@@ -151,41 +151,41 @@ const signalCanvasManifest = {
 
 export const catalogEntries: readonly CatalogEntry[] = [
   {
-    id: "quiet-workspace",
-    templateId: "web/react/heroui/quiet-grid",
-    slug: "quiet-grid",
-    name: { zh: "静默网格", en: "Quiet Grid" },
-    englishName: "Quiet Grid",
+    id: "blackline-overview",
+    templateId: "web/react/shadcn/blackline-saas",
+    slug: "blackline-saas",
+    name: { zh: "Blackline SaaS", en: "Blackline SaaS" },
+    englishName: "Blackline SaaS",
     version: "1.0.0",
-    family: "quiet-grid",
-    familyVersion: "quiet-grid@1.0.0",
+    family: "blackline-saas",
+    familyVersion: "blackline-saas@1.0.0",
     summary: {
-      zh: "安静、精确、具有编辑感的通用界面系统，适合信息密度较高的工作产品与内容页面。",
-      en: "A calm, precise interface system for dense work products and editorial content."
+      zh: "灰黑白 SaaS 工作台模板，采用 shadcn Sidebar 布局。",
+      en: "A monochrome SaaS workspace built around the shadcn Sidebar layout."
     },
     platform: "web",
     runtime: "browser",
     framework: { id: "react", label: "React", range: "19.x" },
-    library: { id: "heroui", label: "HeroUI", range: "3.x" },
-    buildTools: ["Vite", "Next.js"],
+    library: { id: "shadcn", label: "shadcn/ui", range: "4.x" },
+    buildTools: ["Vite"],
     packageManagers: ["npm", "pnpm"],
     language: "TypeScript strict",
     theme: "Light",
-    mood: "calm",
-    moodLabel: { zh: "安静克制", en: "Calm and precise" },
-    density: { zh: "舒适", en: "Comfortable" },
+    mood: "monochrome",
+    moodLabel: { zh: "灰黑白", en: "Monochrome" },
+    density: { zh: "紧凑", en: "Compact" },
     shape: { zh: "轻微圆角", en: "Soft corners" },
-    contrast: { zh: "平衡", en: "Balanced" },
-    updatedAt: "2026-08-10",
-    image: "/assets/quiet-grid-workspace.jpg",
-    editorialImage: "/assets/quiet-grid-editorial.jpg",
+    contrast: { zh: "清晰", en: "Clear" },
+    updatedAt: "2026-08-11",
+    image: "/assets/blackline-saas-dashboard.svg",
+    editorialImage: "/assets/blackline-saas-dashboard.svg",
     tags: [
-      { zh: "编辑感", en: "Editorial" },
-      { zh: "克制", en: "Restrained" },
-      { zh: "工具界面", en: "Product UI" },
-      { zh: "知识内容", en: "Knowledge" }
+      { zh: "SaaS", en: "SaaS" },
+      { zh: "灰黑白", en: "Monochrome" },
+      { zh: "工作台", en: "Workspace" },
+      { zh: "数据看板", en: "Analytics" }
     ],
-    categories: ["apps", "dashboards", "components", "content"],
+    categories: ["apps", "dashboards", "components"],
     publisher: {
       id: "studio",
       name: { zh: "UIDevTpl 团队", en: "UIDevTpl Studio" },
@@ -196,24 +196,24 @@ export const catalogEntries: readonly CatalogEntry[] = [
     metrics: { views: 12800, likes: 936 },
     featured: true,
     showcases: [
-      { id: "workspace", label: { zh: "AI 项目工作台", en: "AI Project Workspace" }, shortLabel: { zh: "AI 工作台", en: "Workspace" } },
-      { id: "publication", label: { zh: "知识出版", en: "Knowledge Publication" }, shortLabel: { zh: "知识出版", en: "Publication" } }
+      { id: "overview", label: { zh: "数据总览", en: "Overview" }, shortLabel: { zh: "总览", en: "Overview" } },
+      { id: "billing", label: { zh: "账单管理", en: "Billing" }, shortLabel: { zh: "账单", en: "Billing" } }
     ],
     componentGroups: [
-      { label: { zh: "操作与展示", en: "Actions & display" }, items: ["Button", "IconButton", "Link", "Badge", "Avatar", "Divider"] },
-      { label: { zh: "表单输入", en: "Form inputs" }, items: ["Input", "Textarea", "Select", "Checkbox", "Radio", "Switch"] },
-      { label: { zh: "导航与浮层", en: "Navigation & overlays" }, items: ["Tabs", "Accordion", "Pagination", "Tooltip", "Dropdown", "Popover", "Modal", "Drawer", "Toast"] },
-      { label: { zh: "数据与状态", en: "Data & states" }, items: ["DataList", "SearchBar", "FilterToolbar", "EmptyState", "ErrorState", "Skeleton"] }
+      { label: { zh: "操作与展示", en: "Actions & display" }, items: ["Button", "Avatar", "Separator"] },
+      { label: { zh: "输入", en: "Inputs" }, items: ["Input", "Search"] },
+      { label: { zh: "导航与浮层", en: "Navigation & overlays" }, items: ["Sidebar", "Breadcrumb", "Tooltip", "DropdownMenu", "Collapsible"] },
+      { label: { zh: "数据与状态", en: "Data & states" }, items: ["DataTable", "EmptyState", "Loading", "Skeleton"] }
     ],
     skeletons: [
       { id: "marketing", label: { zh: "营销页", en: "Marketing" }, description: { zh: "品牌、产品或服务的公开展示页面", en: "A public page for a product, service, or brand" }, icon: "panels-top-left" },
       { id: "application", label: { zh: "应用界面", en: "Application" }, description: { zh: "工作台、管理与高频操作页面", en: "A workspace for operations and repeated actions" }, icon: "panel-left" },
       { id: "content", label: { zh: "内容页", en: "Content" }, description: { zh: "文章、知识库与深度阅读页面", en: "A page for editorial content and deep reading" }, icon: "newspaper" }
     ],
-    artifact: quietGridManifest,
+    artifact: blacklineSaasManifest,
     availability: "draft",
-    sourceDirectory: ".uidevtpl/web/react/heroui/quiet-grid",
-    previewPath: "/preview/web/react/heroui/quiet-grid/1.0.0/workspace"
+    sourceDirectory: ".uidevtpl/web/react/shadcn/blackline-saas",
+    previewPath: "/preview/web/react/shadcn/blackline-saas/1.0.0/overview"
   },
   {
     id: "signal-launch",

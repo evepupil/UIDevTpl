@@ -2,8 +2,26 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+const templateThemeCss = "/packages/templates/web/react/shadcn/blackline-saas/src/index.css";
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    {
+      name: "preview-template-theme-adapter",
+      enforce: "pre",
+      transform(code, id) {
+        if (!id.replaceAll("\\", "/").includes(templateThemeCss)) {
+          return null;
+        }
+
+        return {
+          code: code.replace('@import "@fontsource-variable/geist";\n', ""),
+          map: null
+        };
+      }
+    },
+    react()
+  ],
   build: {
     emptyOutDir: true,
     rollupOptions: {

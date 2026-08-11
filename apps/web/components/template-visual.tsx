@@ -5,6 +5,19 @@ interface TemplateVisualProps {
 }
 
 export function TemplateVisual({ entry }: TemplateVisualProps) {
+  if (entry.mood === "monochrome") {
+    return (
+      <div className="template-visual visual-blackline" aria-hidden="true">
+        <aside><b><i /><i /><i /><i /></b><span /><span /><span /><em /></aside>
+        <section>
+          <header><span>WORKSPACE</span><i /><i /></header>
+          <div className="blackline-visual-title"><small>OVERVIEW</small><strong>Revenue</strong><b>Export</b></div>
+          <div className="blackline-visual-grid"><div><i /><i /><i /><i /><i /></div><div><span /><span /><span /></div></div>
+        </section>
+      </div>
+    )
+  }
+
   if (entry.mood === "expressive") {
     return (
       <div className="template-visual visual-signal" aria-hidden="true">

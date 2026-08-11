@@ -1,0 +1,37 @@
+import type { TemplateManifest } from "@uidevtpl/schema"
+
+import { blacklineSaasFamily } from "@uidevtpl/design-families"
+
+export { BlacklineBillingShowcase, BlacklineComponentLab, BlacklineSaasShowcase } from "./blackline-saas"
+export { blacklineSaasFamily }
+
+export const blacklineSaasManifest = {
+  schemaVersion: 1,
+  id: "web/react/shadcn/blackline-saas",
+  version: "1.0.0",
+  family: { id: blacklineSaasFamily.id, version: blacklineSaasFamily.version },
+  platform: "web",
+  framework: { id: "react", range: "19.x" },
+  componentLibrary: { id: "shadcn", range: "4.x" },
+  runtime: "browser",
+  compatibility: {
+    node: "24.x",
+    react: "19.x",
+    typescript: "7.x",
+    buildTools: ["Vite 8.x"],
+  },
+  target: {
+    library: { delivery: "source", cliVersion: "4.16.2", registrySchema: "new-york-v4" },
+    style: "base-nova",
+    primitive: "base-ui",
+    iconLibrary: "lucide",
+  },
+  sourceDirectory: ".uidevtpl/web/react/shadcn/blackline-saas",
+  artifact: {
+    file: "uidevtpl-web-react-shadcn-blackline-saas-1.0.0.zip",
+    sha256: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  },
+  availability: "draft",
+} as const satisfies TemplateManifest
+
+export type { TemplateManifest } from "@uidevtpl/schema"

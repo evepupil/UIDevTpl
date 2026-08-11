@@ -29,6 +29,16 @@ export interface TemplateManifest {
     typescript: string;
     buildTools: string[];
   };
+  target?: {
+    library: {
+      delivery: "source" | "registry";
+      cliVersion: string;
+      registrySchema: string;
+    };
+    style: string;
+    primitive: string;
+    iconLibrary: string;
+  };
   sourceDirectory: string;
   artifact: {
     file: string;
@@ -135,6 +145,26 @@ export const templateManifestSchema = {
         react: { type: "string", minLength: 1 },
         typescript: { type: "string", minLength: 1 },
         buildTools: { type: "array", minItems: 1, items: { type: "string", minLength: 1 } }
+      }
+    },
+    target: {
+      type: "object",
+      additionalProperties: false,
+      required: ["library", "style", "primitive", "iconLibrary"],
+      properties: {
+        library: {
+          type: "object",
+          additionalProperties: false,
+          required: ["delivery", "cliVersion", "registrySchema"],
+          properties: {
+            delivery: { type: "string", enum: ["source", "registry"] },
+            cliVersion: { type: "string", minLength: 1 },
+            registrySchema: { type: "string", minLength: 1 }
+          }
+        },
+        style: { type: "string", minLength: 1 },
+        primitive: { type: "string", minLength: 1 },
+        iconLibrary: { type: "string", minLength: 1 }
       }
     },
     sourceDirectory: { type: "string", minLength: 1 },

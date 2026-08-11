@@ -17,38 +17,39 @@ export interface DesignFamilyContract {
   pageSkeletons: string[];
 }
 
-export const quietGridFamily = {
-  id: "quiet-grid",
+export const blacklineSaasFamily = {
+  id: "blackline-saas",
   version: "1.0.0",
-  name: "Quiet Grid",
-  description: "安静、精确、具有编辑感的通用界面系统，适合信息密度较高的工作产品与内容页面。",
+  name: "Blackline SaaS",
+  description: "一套以灰、黑、白为主的 SaaS 工作台系统，保留清晰的侧栏导航和紧凑的数据层级。",
   platforms: ["web"],
   runtimes: ["browser"],
-  themes: ["light"],
-  traits: ["编辑感", "克制", "工具界面", "知识内容"],
+  themes: ["light", "dark"],
+  traits: ["monochrome", "saas", "workspace", "data-dense"],
   tokens: {
     colors: {
-      canvas: "#f4f5f1",
-      surface: "#ffffff",
-      ink: "#19221e",
-      muted: "#6c7771",
-      border: "#d8ded8",
-      accent: "#567565"
+      background: "oklch(1 0 0)",
+      foreground: "oklch(0.145 0 0)",
+      muted: "oklch(0.97 0 0)",
+      border: "oklch(0.922 0 0)",
+      primary: "oklch(0.205 0 0)",
+      accent: "oklch(0.97 0 0)"
     },
     typography: {
-      display: "system-ui",
-      body: "system-ui",
+      display: "Geist Variable",
+      body: "Geist Variable",
       mono: "ui-monospace"
     },
     radii: {
-      sm: "4px",
-      md: "8px"
+      sm: "calc(0.625rem * 0.6)",
+      md: "calc(0.625rem * 0.8)",
+      lg: "0.625rem"
     },
     spacing: {
       unit: "4px",
-      section: "64px"
+      section: "24px"
     }
   },
-  requiredComponents: ["Button", "Input", "Select", "Tabs", "Modal", "Toast", "EmptyState", "Skeleton"],
-  pageSkeletons: ["marketing", "application", "content"]
+  requiredComponents: ["Sidebar", "Button", "Input", "Breadcrumb", "DropdownMenu", "Collapsible", "Avatar", "Separator", "Tooltip", "Skeleton"],
+  pageSkeletons: ["application", "marketing", "content"]
 } as const satisfies DesignFamilyContract;

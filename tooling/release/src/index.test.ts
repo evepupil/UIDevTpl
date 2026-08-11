@@ -4,13 +4,13 @@ import { buildReleaseArtifactPaths } from "./index";
 describe("release artifact paths", () => {
   it("keeps artifacts under the immutable template version", () => {
     expect(buildReleaseArtifactPaths({
-      id: "web/react/heroui/quiet-grid",
+      id: "web/react/shadcn/blackline-saas",
       version: "1.0.0",
       artifact: { file: "template.zip", sha256: "ignored-by-path-builder" }
     })).toEqual({
-      templateZip: "artifacts/web/react/heroui/quiet-grid/1.0.0/template.zip",
-      previewArchive: "artifacts/web/react/heroui/quiet-grid/1.0.0/preview.zip",
-      checksums: "artifacts/web/react/heroui/quiet-grid/1.0.0/checksums.json"
+      templateZip: "artifacts/web/react/shadcn/blackline-saas/1.0.0/template.zip",
+      previewArchive: "artifacts/web/react/shadcn/blackline-saas/1.0.0/preview.zip",
+      checksums: "artifacts/web/react/shadcn/blackline-saas/1.0.0/checksums.json"
     });
   });
 });

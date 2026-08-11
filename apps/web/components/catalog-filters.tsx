@@ -32,7 +32,7 @@ export function CatalogFilters({ locale, filters, action = "/templates", categor
         <span>{copy.library}</span>
         <select name="library" defaultValue={filters.library ?? ""}>
           <option value="">{copy.library}</option>
-          <option value="heroui">HeroUI</option>
+          <option value="shadcn">shadcn/ui</option>
         </select>
       </label>
       <label className="filter-select">

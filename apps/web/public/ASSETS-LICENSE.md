@@ -4,8 +4,8 @@
 
 | 文件 | 原型来源记录 | 用途 |
 | --- | --- | --- |
-| `quiet-grid-workspace.jpg` | Unsplash `photo-1497366754035-f200968a6e72` | Quiet Grid 工作台目录与详情预览 |
-| `quiet-grid-editorial.jpg` | Unsplash `photo-1497215842964-222b430dc094` | Quiet Grid 内容 Showcase 预览 |
+| `quiet-grid-workspace.jpg` | Unsplash `photo-1497366754035-f200968a6e72` | 旧原型工作台预览资产，Blackline SaaS 目录不再使用 |
+| `quiet-grid-editorial.jpg` | Unsplash `photo-1497215842964-222b430dc094` | 旧原型内容预览资产，Blackline SaaS 目录不再使用 |
 | `signal-canvas-product.jpg` | Unsplash `photo-1523275335684-37898b6baf30` | Signal Canvas 目录与详情预览 |
 
 详细授权说明见 [`prototype/ASSETS-LICENSE.md`](../../../prototype/ASSETS-LICENSE.md)。
