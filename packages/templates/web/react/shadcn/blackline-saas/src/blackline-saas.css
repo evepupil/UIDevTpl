@@ -21,6 +21,7 @@
 }
 
 .blackline-root,
+.blackline-app,
 .blackline-lab {
   --radius: 0.375rem;
   --radius-sm: 0.225rem;
