@@ -3,15 +3,15 @@
 | 项目 | 内容 |
 | --- | --- |
 | 项目目标 | 建立可预览、可下载、可迁移，并能让 AI 稳定延续视觉风格的精选 UI 模板平台 |
-| 当前阶段 | M1 / M2 高保真原型验证 |
+| 当前阶段 | M1 / M2 生产实现与技术路线迁移 |
 | 最近更新 | 2026-08-11 |
 
 | 里程碑 | 目标 | 状态 | 依赖 | 模块文档 | 退出标准 |
 | --- | --- | --- | --- | --- | --- |
 | <span id="m0">M0</span> | 锁定 V1 产品范围、模板规范和验收口径 | 已完成 | 无 | [需求与规范](./模块设计/需求与规范.md) | 产品需求与模板规范完成一致性检查，并形成 Git commit |
 | <span id="m1">M1</span> | 完成模板库、固定版本、预览、分发和迁移指令闭环 | 进行中 | M0 | [模板平台](./模块设计/模板平台.md)、[技术架构与构建](./模块设计/技术架构与构建.md) | 网站 P0 功能、Schema、构建和 Vercel 部署门禁通过 |
-| <span id="m2">M2</span> | 完成 `quiet-grid` 家族及 Web / React / HeroUI 实现 | 进行中 | M0 | [Quiet Grid 模板](./模块设计/Quiet-Grid模板.md) | 组件实验室、两个 Showcase、三类页面骨架和模板包门禁通过 |
+| <span id="m2">M2</span> | 完成 `quiet-grid` 家族及 Web / React / shadcn/ui 实现 | 进行中 | M0 | [Quiet Grid 模板](./模块设计/Quiet-Grid模板.md) | shadcn/ui 源码重写、组件实验室、两个 Showcase、三类页面骨架和模板包门禁通过 |
 | <span id="m3">M3</span> | 完成第二个明显不同的视觉家族及 Web 实现 | 未开始 | M1、M2 | [第二视觉家族](./模块设计/第二视觉家族.md) | 第二家族独立通过与首个模板相同的发布门禁 |
 | <span id="m4">M4</span> | 完成公开 V1 的迁移、视觉、运营和发布验收 | 未开始 | M1、M2、M3 | [发布与验收](./模块设计/发布与验收.md) | 10 个迁移任务至少成功 9 个，无发布阻断问题，生产环境可访问 |
 
-M0 已通过基线提交 `5b9dd48` 完成，后续需求补充继续归档到同一基准。当前聚焦 M1 与 M2 的实现验证；[`prototype/index.html`](../prototype/index.html) 已按 v0 Templates 的浏览层级覆盖 Category、分享者、点赞、明暗主题、中英文与账号/投稿预留，`apps/web` 的主站视觉已同步该原型基线。[V1 技术架构](./模块设计/技术架构与构建.md) 已锁定 pnpm/Turborepo monorepo、Next.js 主站、Vite MPA 预览、Vercel 双 Project 与 Vercel Blob。主站 P0 路由、版本化 Catalog、预览脚手架和首个模板源码边界已经接入，主站已部署并绑定 `uidevtpl.chaosyn.com`，独立 Preview Project 已部署并绑定 `preview.chaosyn.com`，主站生产环境的 `NEXT_PUBLIC_PREVIEW_ORIGIN` 已指向该域名，预览深链和主站详情 iframe 已完成线上验收；真实模板完整门禁、固定产物、Blob、GitHub Actions 预览发布流水线与公开 V1 验收仍待实现，因此 M1 与 M2 保持“进行中”。
+M0 已通过基线提交 `5b9dd48` 完成，后续需求补充继续归档到同一基准。当前聚焦 M1 与 M2 的实现验证；[`prototype/index.html`](../prototype/index.html) 已按 v0 Templates 的浏览层级覆盖 Category、分享者、点赞、明暗主题、中英文与账号/投稿预留，`apps/web` 的主站视觉已同步该原型基线。[V1 技术架构](./模块设计/技术架构与构建.md) 已锁定 pnpm/Turborepo monorepo、Next.js 主站、Vite MPA 预览、Vercel 双 Project 与 Vercel Blob，并在 2026-08-11 将官网 UI 与 V1 React 模板统一收敛到 shadcn/ui。主站 P0 路由、版本化 Catalog、预览脚手架和临时模板源码边界已经接入，主站已部署并绑定 `uidevtpl.chaosyn.com`，独立 Preview Project 已部署并绑定 `preview.chaosyn.com`，主站生产环境的 `NEXT_PUBLIC_PREVIEW_ORIGIN` 已指向该域名，预览深链和主站详情 iframe 已完成线上验收。当前 HeroUI 首模板仅为待删除草稿；后续将删除对应源码、Catalog 和预览数据，再从零编写 `web/react/shadcn/quiet-grid`。官网 shadcn/ui 组件层、全新模板实现、真实模板完整门禁、固定产物、Blob、GitHub Actions 预览发布流水线与公开 V1 验收仍待实现，因此 M1 与 M2 保持“进行中”。
