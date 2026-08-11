@@ -54,6 +54,7 @@ shadcn sidebar-07 + base-nova tokens
 - `BlacklineSaasShowcase` 提供 Overview，其他 Showcase 通过同一 WorkspaceApp 进入独立页面；`resource-manifest.ts` 记录可复用资源和 primitive 依赖。
 - Component Lab 覆盖按钮、状态徽标、Loading、Empty、表格和活动时间线状态；当前共有 5 项平台数据与导航纯函数单测。
 - 页面画布使用 `muted` 背景，主要业务区块使用 `card` surface 和统一圆角边框；分割线收敛到表格行、列表项和时间线内部，避免用横线承担页面层级。
+- Blackline 自有 CSS 作用域将 `--radius` 从官方默认的 10px 收紧为 6px，统一按钮、输入框、Select、卡片和对话框的转角；官方生成文件保持原样。
 - `manifest.json` 与 `src/index.ts` 同步记录 shadcn CLI、Registry Schema、style、primitive 和 icon library。
 - `vite.config.ts` 保留官方初始化结构，仅将 Node 24 下的 `__dirname` 改为等价的 `import.meta.dirname`；Sidebar、UI primitive、导航源码和 `src/index.css` 不做自定义修改。
 
@@ -81,6 +82,7 @@ shadcn sidebar-07 + base-nova tokens
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-08-12 | 收紧 Blackline 自有作用域的圆角 token，从 10px 调整为 6px，统一扁平按钮与卡片控件的视觉转角 |
 | 2026-08-12 | 将主要业务区块改为卡片 surface，收敛页面级分割线，增加画布与卡片的灰白层级，并将 Deployments 筛选栏与结果数合并为一个面板 |
 | 2026-08-11 | 将模板重构为 Shell、Patterns、Blocks 和 platform-data 资源层，新增 Deployments、Deployment detail、Models、Settings 页面，并让 Showcase 只负责组合资源 |
 | 2026-08-11 | 删除旧 Revenue / dashboard-data 示例，迁移平台筛选和导航纯函数测试，补齐 README、PARITY 和 MIGRATION 的资源复用说明 |
