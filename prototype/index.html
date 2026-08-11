@@ -1,102 +1,231 @@
 <!doctype html>
 <html lang="zh-CN" data-theme="light">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="UIDevTpl：为 AI 编程提供可预览、可迁移的精选 UI 模板。" />
-    <title>UIDevTpl - 模板库</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="UIDevTpl 主站布局与交互原型" />
+    <title>UIDevTpl / Signal Desk Prototype</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./vendor/lucide.min.js"></script>
-    <script defer src="./app.js"></script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#" data-home><span class="brand-mark">UI</span><span>UIDevTpl</span></a>
-
-      <nav class="main-nav" aria-label="主导航">
-        <div class="nav-menu-wrap">
-          <button class="nav-button is-active" id="templates-menu-button" type="button" aria-expanded="false">
-            <span data-copy="templates">模板</span><i data-lucide="chevron-down"></i>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <button class="brand" type="button" data-nav="home" aria-label="返回首页">
+            <span class="brand-mark" aria-hidden="true">UI</span>
+            <span class="brand-copy">
+              <strong>UIDevTpl</strong>
+              <small>Interface systems for AI</small>
+            </span>
           </button>
-          <div class="templates-menu" id="templates-menu" hidden></div>
-        </div>
-      </nav>
 
-      <div class="header-actions">
-        <button class="share-button" type="button" data-placeholder="share"><i data-lucide="plus"></i><span data-copy="share">分享模板</span></button>
-        <button class="icon-button" id="language-button" type="button" aria-label="Switch language" title="Switch language"><i data-lucide="languages"></i></button>
-        <button class="icon-button" id="theme-button" type="button" aria-label="切换主题" title="切换主题"><i data-lucide="moon"></i></button>
-        <button class="login-button" type="button" data-placeholder="login" data-copy="login">登录</button>
-        <button class="signup-button" type="button" data-placeholder="signup" data-copy="signup">注册</button>
-      </div>
-    </header>
+          <nav class="primary-nav" aria-label="主导航">
+            <button type="button" data-nav="home" data-nav-label="overview">概览</button>
+            <button type="button" data-nav="library" data-nav-label="library">模板库</button>
+            <button type="button" data-nav="categories" data-nav-label="categories">用途</button>
+            <button type="button" data-nav="guide" data-nav-label="guide">使用指南</button>
+          </nav>
 
-    <main>
-      <section id="home-view">
-        <div class="hero shell">
-          <p data-copy="eyebrow">CURATED UI SYSTEMS FOR AI BUILDERS</p>
-          <h1 data-copy="title">为 AI 开发找到好界面</h1>
-          <span data-copy="subtitle">浏览经过打磨的组件、页面与完整模板，让 AI 从真实代码延续同一套设计。</span>
-          <label class="search-box">
-            <i data-lucide="search"></i>
-            <input id="search-input" type="search" autocomplete="off" placeholder="搜索模板、分类或视觉风格" />
-            <kbd>Ctrl K</kbd>
-          </label>
-        </div>
-
-        <section class="section shell" id="category-section">
-          <div class="section-head">
-            <h2 data-copy="categories">分类</h2>
-            <button class="text-link" type="button" data-all-categories><span data-copy="browseAll">浏览全部</span><i data-lucide="arrow-right"></i></button>
+          <div class="topbar-actions">
+            <button class="command-trigger" type="button" data-action="open-search">
+              <span class="command-symbol" aria-hidden="true">/</span>
+              <span data-copy="search">搜索模板</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+            <button class="quiet-button" type="button" data-action="reserved" data-copy="submit">分享模板</button>
+            <button class="icon-text-button" type="button" data-action="toggle-language" data-copy="language">中 / EN</button>
+            <button class="icon-text-button" type="button" data-action="toggle-theme" data-copy="theme">深色</button>
+            <button class="outline-button" type="button" data-action="reserved" data-copy="login">登录</button>
+            <button class="menu-button" type="button" data-action="toggle-mobile" aria-label="打开菜单">菜单</button>
           </div>
-          <div class="category-strip" id="home-categories"></div>
-        </section>
+        </div>
+        <div class="mobile-nav-panel" id="mobile-nav" hidden>
+          <button type="button" data-nav="home" data-copy="overview">概览</button>
+          <button type="button" data-nav="library" data-copy="library">模板库</button>
+          <button type="button" data-nav="categories" data-copy="categories">用途</button>
+          <button type="button" data-nav="guide" data-copy="guide">使用指南</button>
+          <button type="button" data-action="open-search" data-copy="search">搜索模板</button>
+        </div>
+      </header>
 
-        <section class="section shell" id="featured-section">
-          <div class="section-head"><h2 data-copy="featured">精选模板</h2></div>
-          <div class="template-grid featured-grid" id="featured-grid"></div>
-        </section>
+      <main class="main-content">
+        <section class="view home-view" id="home-view" data-view="home">
+          <div class="home-intro-grid">
+            <div class="intro-copy">
+              <p class="eyebrow">UIDEVTPL / SIGNAL DESK</p>
+              <h1>从一套真实界面系统开始。</h1>
+              <p class="intro-body">先看清页面、组件和技术边界，再把固定版本交给 AI 迁移到你的项目。</p>
+              <form class="hero-search" id="home-search-form">
+                <span class="search-mark" aria-hidden="true">/</span>
+                <label class="sr-only" for="home-search">搜索模板、技术栈或用途</label>
+                <input id="home-search" type="search" placeholder="搜索模板、技术栈或用途" autocomplete="off" />
+                <button type="submit" data-copy="searchAction">查找</button>
+              </form>
+              <div class="intro-metrics" aria-label="目录概览">
+                <span><strong>04</strong><small data-copy="publicSystems">公开系统</small></span>
+                <span><strong>03</strong><small data-copy="stackOptions">技术组合</small></span>
+                <span><strong>01</strong><small data-copy="currentRelease">当前发布</small></span>
+              </div>
+            </div>
 
-        <section class="section all-section shell">
-          <div class="library-toolbar">
-            <div><h2 data-copy="allTemplates">全部模板</h2><span id="result-count"></span></div>
-            <label class="sort-control"><select id="sort-select"><option value="popular" data-copy="popular">热门排序</option><option value="newest" data-copy="newest">最新分享</option><option value="name" data-copy="nameSort">名称排序</option></select><i data-lucide="chevron-down"></i></label>
+            <article class="feature-module" aria-labelledby="feature-title">
+              <div class="module-topline">
+                <span class="module-label" data-copy="featuredSystem">精选系统</span>
+                <span class="module-status"><i></i><span data-copy="previewStatus">可预览</span></span>
+              </div>
+              <div class="feature-layout">
+                <button class="feature-preview" type="button" data-open-template="quiet-workspace" aria-label="打开 Quiet Grid Workspace 详情">
+                  <span class="wireframe wireframe-workspace" aria-hidden="true">
+                    <span class="wf-sidebar"><i></i><i></i><i></i><b></b></span>
+                    <span class="wf-main">
+                      <i class="wf-toolbar"></i>
+                      <span class="wf-heading"><i></i><b></b><em></em></span>
+                      <span class="wf-columns"><i></i><i></i><i></i></span>
+                      <span class="wf-table"><i></i><i></i><i></i><i></i></span>
+                    </span>
+                  </span>
+                  <span class="preview-caption"><span>SHOWCASE / WORKSPACE</span><span>OPEN DETAIL ↗</span></span>
+                </button>
+                <div class="feature-inspector">
+                  <p class="feature-index">01 / 04</p>
+                  <h2 id="feature-title">Quiet Grid Workspace</h2>
+                  <p class="feature-summary">安静、精确的工作界面，适合复杂任务和高密度信息。</p>
+                  <div class="tag-row"><span>Web</span><span>React</span><span>shadcn/ui</span><span>Light</span></div>
+                  <div class="feature-actions">
+                    <button class="primary-button" type="button" data-open-template="quiet-workspace" data-copy="inspect">检查系统</button>
+                    <button class="text-button" type="button" data-action="copy-ai" data-template="quiet-workspace" data-copy="copyAi">复制给 AI</button>
+                  </div>
+                  <dl class="mini-facts">
+                    <div><dt>ID</dt><dd>web/react/shadcn/quiet-grid</dd></div>
+                    <div><dt>VERSION</dt><dd>v0.1.0-preview</dd></div>
+                    <div><dt>UPDATED</dt><dd>2026.08.11</dd></div>
+                  </dl>
+                </div>
+              </div>
+            </article>
           </div>
-          <div class="template-grid" id="template-grid"></div>
-          <div class="empty-state" id="empty-state" hidden><i data-lucide="search-x"></i><h2 data-copy="emptyTitle">没有匹配的模板</h2><p data-copy="emptyBody">换一个关键词试试。</p></div>
+
+          <section class="home-section intent-section" aria-labelledby="intent-title">
+            <div class="section-heading">
+              <div><p class="eyebrow">01 / INTENT INDEX</p><h2 id="intent-title">你正在构建什么？</h2></div>
+              <button class="text-button" type="button" data-nav="categories" data-copy="browseAll">查看全部用途 →</button>
+            </div>
+            <div class="intent-index" id="home-intents"></div>
+          </section>
+
+          <section class="home-section systems-section" aria-labelledby="systems-title">
+            <div class="section-heading">
+              <div><p class="eyebrow">02 / SYSTEMS</p><h2 id="systems-title">最近加入的系统</h2></div>
+              <button class="text-button" type="button" data-nav="library" data-copy="openLibrary">打开模板库 →</button>
+            </div>
+            <div class="template-grid" id="home-template-grid"></div>
+          </section>
+
+          <section class="migration-strip" aria-labelledby="migration-title">
+            <div class="migration-heading"><p class="eyebrow">03 / HANDOFF</p><h2 id="migration-title">看完之后，交给 AI 继续。</h2><p>固定版本、校验值和迁移指令会跟着同一套系统走进你的项目。</p></div>
+            <div class="migration-steps">
+              <div><span>01</span><strong>Inspect</strong><small>操作真实预览</small></div>
+              <div><span>02</span><strong>Pin</strong><small>确认固定版本</small></div>
+              <div><span>03</span><strong>Handoff</strong><small>复制给 AI 迁移</small></div>
+            </div>
+            <button class="outline-button" type="button" data-nav="guide" data-copy="readGuide">阅读迁移指南</button>
+          </section>
         </section>
+
+        <section class="view library-view" id="library-view" data-view="library" hidden>
+          <div class="page-heading">
+            <div><p class="eyebrow">UIDEVTPL / LIBRARY</p><h1>模板库</h1><p>按用途、技术栈和版本状态找到可以直接交给 AI 的界面系统。</p></div>
+            <span class="heading-count" id="library-count">04 systems</span>
+          </div>
+          <div class="library-layout">
+            <aside class="filter-panel" aria-label="模板筛选">
+              <div class="filter-heading"><strong>筛选</strong><span class="filter-heading-actions"><button class="text-button" type="button" data-action="clear-filters">清除</button><button class="filter-close" type="button" data-action="mobile-filters">关闭</button></span></div>
+              <label class="filter-label" for="library-search">关键词</label>
+              <div class="filter-input"><span>/</span><input id="library-search" type="search" placeholder="名称或 ID" /></div>
+              <fieldset>
+                <legend>用途</legend>
+                <label><input type="radio" name="category" value="all" checked /> <span>全部用途</span><small id="category-count-all">04</small></label>
+                <label><input type="radio" name="category" value="apps" /> <span>应用与游戏</span><small>02</small></label>
+                <label><input type="radio" name="category" value="landing" /> <span>营销与落地页</span><small>02</small></label>
+                <label><input type="radio" name="category" value="dashboards" /> <span>数据看板</span><small>02</small></label>
+                <label><input type="radio" name="category" value="components" /> <span>组件与交互</span><small>02</small></label>
+                <label><input type="radio" name="category" value="content" /> <span>内容与作品集</span><small>02</small></label>
+              </fieldset>
+              <fieldset>
+                <legend>实现</legend>
+                <label><input type="radio" name="framework" value="all" checked /> <span>全部实现</span></label>
+                <label><input type="radio" name="framework" value="react" /> <span>React</span></label>
+                <label><input type="radio" name="framework" value="next" /> <span>Next.js</span></label>
+              </fieldset>
+            </aside>
+            <section class="library-results">
+              <div class="results-toolbar">
+                <div><strong id="results-label">全部系统</strong><span id="results-filter-note">可预览版本</span></div>
+                <div class="toolbar-actions"><button class="filter-mobile-button" type="button" data-action="mobile-filters">筛选</button><label class="sort-control" for="sort-select"><span>排序</span><select id="sort-select"><option value="popular">热度</option><option value="newest">最新</option><option value="name">名称</option></select></label></div>
+              </div>
+              <div class="template-grid library-grid" id="library-grid"></div>
+              <div class="empty-state" id="empty-state" hidden><span class="empty-index">00</span><h2>没有匹配的系统</h2><p>换个关键词或清除筛选，继续浏览目录。</p><button class="outline-button" type="button" data-action="clear-filters">清除筛选</button></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view categories-view" id="categories-view" data-view="categories" hidden>
+          <div class="page-heading page-heading-wide">
+            <div><p class="eyebrow">UIDEVTPL / INTENT INDEX</p><h1>按你要构建的东西找系统。</h1><p>用途只帮助你找到起点，不改变模板自身的固定身份。</p></div>
+            <span class="heading-note">06 intents / 04 systems</span>
+          </div>
+          <div class="category-directory" id="category-directory"></div>
+        </section>
+
+        <section class="view guide-view" id="guide-view" data-view="guide" hidden>
+          <div class="page-heading page-heading-wide">
+            <div><p class="eyebrow">UIDEVTPL / HANDOFF GUIDE</p><h1>把一套系统交给 AI。</h1><p>迁移指令负责固定版本、校验源码并把参考目录留在你的项目里。</p></div>
+            <button class="primary-button" type="button" data-action="copy-ai" data-template="quiet-workspace" data-copy="copyAi">复制示例指令</button>
+          </div>
+          <div class="guide-grid">
+            <article><span>01</span><h2>确认当前项目</h2><p>让 AI 先读取项目目录、规则、技术栈、包管理器和现有改动。</p><code>inspect project context</code></article>
+            <article><span>02</span><h2>下载并校验</h2><p>使用固定版本地址下载模板包，校验 SHA-256 后再继续。</p><code>verify sha256</code></article>
+            <article><span>03</span><h2>保留参考源码</h2><p>将完整模板保存到 `.uidevtpl/`，不要直接覆盖现有业务文件。</p><code>.uidevtpl/web/react/...</code></article>
+            <article><span>04</span><h2>迁移并运行门禁</h2><p>迁移 tokens、组件和页面骨架，运行项目已有的格式化、测试和构建。</p><code>report migration result</code></article>
+          </div>
+          <div class="guide-callout"><strong>原型提示</strong><span>正式站会把这里接成固定版本详情页的迁移页签，不会在网站内直接修改你的项目。</span></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>UIDevTpl / Signal Desk prototype</span>
+        <span data-copy="footerNote">布局原型 · 功能位置可操作 · 代码待迁移到 Next.js + shadcn/ui</span>
+      </footer>
+    </div>
+
+    <div class="overlay" id="search-overlay" hidden>
+      <button class="overlay-backdrop" type="button" data-action="close-search" aria-label="关闭搜索"></button>
+      <section class="command-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+        <div class="dialog-heading"><div><p class="eyebrow">COMMAND / SEARCH</p><h2 id="search-dialog-title">查找一个界面系统</h2></div><button class="close-button" type="button" data-action="close-search" aria-label="关闭">×</button></div>
+        <form class="command-form" id="command-search-form"><span>/</span><input id="command-search" type="search" placeholder="输入名称、技术栈或用途" autocomplete="off" /><kbd>ESC</kbd></form>
+        <div class="command-results" id="command-results"></div>
+        <p class="dialog-hint">输入关键词后回车进入模板库；点击结果直接打开详情。</p>
       </section>
+    </div>
 
-      <section class="categories-page shell" id="categories-view" hidden>
-        <nav class="breadcrumb"><button type="button" data-home data-copy="templates">模板</button><i data-lucide="chevron-right"></i><span data-copy="categories">分类</span></nav>
-        <div class="page-title"><h1 data-copy="categoryTitle">全部模板分类</h1><p data-copy="categorySubtitle">按产品用途浏览公开模板，每个分类都用代表页面展示视觉方向。</p></div>
-        <div class="categories-grid" id="categories-grid"></div>
-      </section>
+    <div class="drawer-shell" id="detail-drawer" hidden>
+      <button class="drawer-backdrop" type="button" data-action="close-drawer" aria-label="关闭详情"></button>
+      <aside class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <header class="drawer-header">
+          <div><p class="eyebrow">SYSTEM INSPECTOR</p><h2 id="drawer-title">Template</h2><p id="drawer-id">template/id</p></div>
+          <button class="close-button" type="button" data-action="close-drawer" aria-label="关闭">×</button>
+        </header>
+        <div class="drawer-actions"><button class="primary-button" type="button" data-action="copy-ai" data-copy="copyAi">复制给 AI</button><button class="outline-button" type="button" data-action="reserved" data-copy="openPreview">打开独立预览</button></div>
+        <section class="drawer-preview-section">
+          <div class="drawer-section-topline"><span id="drawer-showcase-label">SHOWCASE / WORKSPACE</span><div class="preview-size-toggle"><button type="button" class="is-active" data-preview-size="desktop">桌面</button><button type="button" data-preview-size="tablet">平板</button><button type="button" data-preview-size="mobile">手机</button></div></div>
+          <div class="drawer-preview" id="drawer-preview"></div>
+        </section>
+        <nav class="drawer-tabs" aria-label="模板详情标签页"><button type="button" class="is-active" data-drawer-tab="showcase">Showcase</button><button type="button" data-drawer-tab="components">组件</button><button type="button" data-drawer-tab="tokens">Tokens</button><button type="button" data-drawer-tab="migration">迁移</button></nav>
+        <section class="drawer-tab-panel" id="drawer-tab-panel"></section>
+      </aside>
+    </div>
 
-      <section class="categories-page shell" id="category-view" hidden>
-        <nav class="breadcrumb"><button type="button" data-home data-copy="templates">模板</button><i data-lucide="chevron-right"></i><button type="button" data-all-categories data-copy="categories">分类</button><i data-lucide="chevron-right"></i><span id="category-crumb"></span></nav>
-        <div class="page-title category-title"><span id="category-icon"></span><div><h1 id="category-name"></h1><p id="category-description"></p></div></div>
-        <div class="template-grid" id="category-template-grid"></div>
-        <div class="empty-state" id="category-empty" hidden><i data-lucide="folder-open"></i><h2 data-copy="categoryEmpty">这个分类正在整理</h2><p data-copy="categoryEmptyBody">公开模板通过审核后会出现在这里。</p></div>
-      </section>
-    </main>
-
-    <dialog class="detail-dialog" id="detail-dialog">
-      <button class="dialog-close icon-button" type="button" data-close aria-label="关闭"><i data-lucide="x"></i></button>
-      <div class="detail-preview" id="detail-preview"></div>
-      <div class="detail-content">
-        <div class="detail-author" id="detail-author"></div>
-        <h2 id="detail-title"></h2>
-        <p id="detail-summary"></p>
-        <div class="detail-meta"><span>React</span><span>HeroUI</span><span>TypeScript</span></div>
-        <div class="detail-actions"><button class="secondary-action" type="button" data-placeholder="preview"><i data-lucide="external-link"></i><span data-copy="preview">查看预览</span></button><button class="primary-action" type="button" data-placeholder="ai"><i data-lucide="copy"></i><span data-copy="copyAi">复制给 AI</span></button></div>
-      </div>
-    </dialog>
-
-    <dialog class="placeholder-dialog" id="placeholder-dialog">
-      <span><i data-lucide="sparkles"></i></span><h2 id="placeholder-title"></h2><p id="placeholder-body"></p><button class="primary-action" type="button" data-close data-copy="gotIt">知道了</button>
-    </dialog>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="check"></i><span id="toast-text"></span></div>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="./app.js" defer></script>
   </body>
 </html>

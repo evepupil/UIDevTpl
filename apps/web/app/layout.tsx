@@ -3,6 +3,10 @@ import "./globals.css";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 import { getSiteLocale } from "../lib/locale";
+import { Noto_Sans } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "UIDevTpl",
@@ -13,7 +17,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const locale = await getSiteLocale();
 
   return (
-    <html lang={locale === "zh" ? "zh-CN" : "en"}>
+    <html lang={locale === "zh" ? "zh-CN" : "en"} className={cn("font-sans", notoSans.variable)}>
       <body>
         <SiteHeader initialLocale={locale} />
         {children}

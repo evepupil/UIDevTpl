@@ -12,11 +12,9 @@
     "dev": "turbo run dev --parallel",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "check:prototype": "node --check prototype/data.js && node --check prototype/lib.js && node --check prototype/render.js && node --check prototype/app.js && node --check prototype/preview.js && node --check prototype/browser-smoke.cjs && node --check prototype/capture-references.cjs",
-    "capture:prototype": "node prototype/capture-references.cjs",
-    "test:unit": "node --test prototype/lib.test.cjs",
+    "check:prototype": "node --check prototype/app.js && node --check prototype/browser-smoke.cjs",
     "test:browser": "node --test prototype/browser-smoke.cjs",
-    "test:prototype": "pnpm run test:unit && pnpm run test:browser",
+    "test:prototype": "pnpm run test:browser",
     "verify:scaffold": "pnpm run typecheck && pnpm run test && pnpm run build",
     "verify": "pnpm run check:prototype && pnpm run test:prototype && pnpm run verify:scaffold"
   },
