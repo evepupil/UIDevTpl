@@ -23,6 +23,13 @@
 .blackline-root,
 .blackline-lab {
   --radius: 0.375rem;
+  --radius-sm: 0.225rem;
+  --radius-md: 0.3rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.525rem;
+  --radius-2xl: 0.675rem;
+  --radius-3xl: 0.825rem;
+  --radius-4xl: 0.975rem;
 }
 
 .blackline-main {
