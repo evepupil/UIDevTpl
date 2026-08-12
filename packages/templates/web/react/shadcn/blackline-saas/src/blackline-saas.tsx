@@ -1,14 +1,41 @@
 import * as React from "react"
 
-import { CircleAlert, Download, MoreHorizontal, Plus, RefreshCw } from "lucide-react"
+import {
+  CircleAlert,
+  Download,
+  MoreHorizontal,
+  Plus,
+  RefreshCw,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
-import { BillingBlock, DeploymentDetailBlock, DeploymentsBlock, ModelsBlock, ProjectOverviewBlock, SettingsBlock } from "./components/blocks"
-import { ActivityTimeline, EmptyState, PageHeader, ResourceTable, StatusBadge, WorkspaceShell, type ResourceColumn } from "./components/patterns"
-import { activityEvents, models, type ModelResource, type PlatformPage } from "./lib/platform-data"
+import {
+  BillingBlock,
+  DeploymentDetailBlock,
+  DeploymentsBlock,
+  ModelsBlock,
+  ProjectOverviewBlock,
+  SettingsBlock,
+} from "./components/blocks"
+import {
+  ActivityTimeline,
+  EmptyState,
+  PageHeader,
+  ResourceTable,
+  StatusBadge,
+  WorkspaceShell,
+  type ResourceColumn,
+} from "./components/patterns"
+import {
+  activityEvents,
+  models,
+  type ModelResource,
+  type PlatformPage,
+} from "./lib/platform-data"
 import { pageHash, pageFromHash, sidebarPage } from "./lib/navigation"
 
 const pageLabels: Record<PlatformPage, string> = {
@@ -53,7 +80,9 @@ function WorkspaceApp({ initialPage }: { initialPage: PlatformPage }) {
       case "deployments":
         return <DeploymentsBlock onNavigate={navigate} onStatus={setNotice} />
       case "deployment-detail":
-        return <DeploymentDetailBlock onNavigate={navigate} onStatus={setNotice} />
+        return (
+          <DeploymentDetailBlock onNavigate={navigate} onStatus={setNotice} />
+        )
       case "models":
         return <ModelsBlock onStatus={setNotice} />
       case "billing":
@@ -62,13 +91,19 @@ function WorkspaceApp({ initialPage }: { initialPage: PlatformPage }) {
         return <SettingsBlock />
       case "overview":
       default:
-        return <ProjectOverviewBlock onNavigate={navigate} onStatus={setNotice} />
+        return (
+          <ProjectOverviewBlock onNavigate={navigate} onStatus={setNotice} />
+        )
     }
   }
 
   return (
     <div className="blackline-app">
-      <WorkspaceShell activePage={sidebarPage(page)} breadcrumb={pageLabels[page]} onNavigate={navigate}>
+      <WorkspaceShell
+        activePage={sidebarPage(page)}
+        breadcrumb={pageLabels[page]}
+        onNavigate={navigate}
+      >
         {renderPage()}
       </WorkspaceShell>
       {notice ? (
@@ -81,7 +116,9 @@ function WorkspaceApp({ initialPage }: { initialPage: PlatformPage }) {
   )
 }
 
-export function BlacklineSaasShowcase({ initialPage = "overview" }: { initialPage?: PlatformPage } = {}) {
+export function BlacklineSaasShowcase({
+  initialPage = "overview",
+}: { initialPage?: PlatformPage } = {}) {
   return <WorkspaceApp initialPage={initialPage} />
 }
 
@@ -106,53 +143,134 @@ export function BlacklineSettingsShowcase() {
 }
 
 export function BlacklineComponentLab() {
-  const [selected, setSelected] = React.useState<"Default" | "Loading" | "Empty">("Default")
+  const [selected, setSelected] = React.useState<
+    "Default" | "Loading" | "Empty"
+  >("Default")
   const modelColumns: readonly ResourceColumn<ModelResource>[] = [
-    { id: "name", header: "Model", render: (model) => <strong>{model.name}</strong> },
-    { id: "version", header: "Version", render: (model) => <code>{model.version}</code> },
-    { id: "status", header: "Status", render: (model) => <StatusBadge status={model.status} /> },
-    { id: "action", header: <span className="sr-only">Actions</span>, className: "blackline-table__actions", render: () => <Button variant="ghost" size="icon-sm" aria-label="More actions"><MoreHorizontal aria-hidden="true" /></Button> },
+    {
+      id: "name",
+      header: "Model",
+      render: (model) => <strong>{model.name}</strong>,
+    },
+    {
+      id: "version",
+      header: "Version",
+      render: (model) => <code>{model.version}</code>,
+    },
+    {
+      id: "status",
+      header: "Status",
+      render: (model) => <StatusBadge status={model.status} />,
+    },
+    {
+      id: "action",
+      header: <span className="sr-only">Actions</span>,
+      className: "w-px text-right",
+      render: () => (
+        <Button variant="ghost" size="icon-sm" aria-label="More actions">
+          <MoreHorizontal aria-hidden="true" />
+        </Button>
+      ),
+    },
   ]
 
   return (
     <TooltipProvider>
       <main className="blackline-lab">
         <PageHeader title="Component lab" />
-        <section className="blackline-lab__section" aria-labelledby="lab-actions-title">
-          <div className="blackline-section__header"><h2 id="lab-actions-title">Actions</h2></div>
-          <div className="blackline-lab__row">
-            <Button><Plus aria-hidden="true" />New model</Button>
-            <Button variant="outline"><Download aria-hidden="true" />Export</Button>
-            <Button variant="ghost" size="icon" aria-label="More actions"><MoreHorizontal aria-hidden="true" /></Button>
-            <Button variant="outline" onClick={() => setSelected("Loading")}><RefreshCw aria-hidden="true" />Loading</Button>
-          </div>
-        </section>
-        <section className="blackline-lab__section" aria-labelledby="lab-status-title">
-          <div className="blackline-section__header"><h2 id="lab-status-title">Statuses</h2></div>
-          <div className="blackline-lab__row">
+        <Card
+          className="blackline-lab__section"
+          aria-labelledby="lab-actions-title"
+        >
+          <CardHeader>
+            <CardTitle id="lab-actions-title">Actions</CardTitle>
+          </CardHeader>
+          <CardContent className="blackline-lab__row">
+            <Button>
+              <Plus aria-hidden="true" />
+              New model
+            </Button>
+            <Button variant="outline">
+              <Download aria-hidden="true" />
+              Export
+            </Button>
+            <Button variant="ghost" size="icon" aria-label="More actions">
+              <MoreHorizontal aria-hidden="true" />
+            </Button>
+            <Button variant="outline" onClick={() => setSelected("Loading")}>
+              <RefreshCw aria-hidden="true" />
+              Loading
+            </Button>
+          </CardContent>
+        </Card>
+        <Card
+          className="blackline-lab__section"
+          aria-labelledby="lab-status-title"
+        >
+          <CardHeader>
+            <CardTitle id="lab-status-title">Statuses</CardTitle>
+          </CardHeader>
+          <CardContent className="blackline-lab__row">
             <StatusBadge status="Ready" />
             <StatusBadge status="Building" />
             <StatusBadge status="Failed" />
             <StatusBadge status="Paused" />
-          </div>
-        </section>
-        <section className="blackline-lab__section" aria-labelledby="lab-states-title">
-          <div className="blackline-section__header"><h2 id="lab-states-title">States</h2></div>
-          <div className="blackline-lab__row blackline-lab__row--states">
-            {(["Default", "Loading", "Empty"] as const).map((state) => (
-              <Button key={state} variant={selected === state ? "default" : "outline"} onClick={() => setSelected(state)} aria-pressed={selected === state}>{state}</Button>
-            ))}
-          </div>
-          <div className="blackline-lab__preview">
-            {selected === "Loading" ? <div className="blackline-lab__skeleton"><Skeleton /><Skeleton /><Skeleton /></div> : null}
-            {selected === "Empty" ? <EmptyState icon={<CircleAlert aria-hidden="true" />} title="No models found" /> : null}
-            {selected === "Default" ? <ResourceTable rows={models.slice(0, 2)} columns={modelColumns} /> : null}
-          </div>
-        </section>
-        <section className="blackline-lab__section" aria-labelledby="lab-timeline-title">
-          <div className="blackline-section__header"><h2 id="lab-timeline-title">Activity timeline</h2></div>
-          <ActivityTimeline events={activityEvents.slice(0, 2)} />
-        </section>
+          </CardContent>
+        </Card>
+        <Card
+          className="blackline-lab__section"
+          aria-labelledby="lab-states-title"
+        >
+          <CardHeader>
+            <CardTitle id="lab-states-title">States</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="blackline-lab__row blackline-lab__row--states">
+              {(["Default", "Loading", "Empty"] as const).map((state) => (
+                <Button
+                  key={state}
+                  variant={selected === state ? "default" : "outline"}
+                  onClick={() => setSelected(state)}
+                  aria-pressed={selected === state}
+                >
+                  {state}
+                </Button>
+              ))}
+            </div>
+            <div className="blackline-lab__preview">
+              {selected === "Loading" ? (
+                <div className="blackline-lab__skeleton">
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                </div>
+              ) : null}
+              {selected === "Empty" ? (
+                <EmptyState
+                  icon={<CircleAlert aria-hidden="true" />}
+                  title="No models found"
+                />
+              ) : null}
+              {selected === "Default" ? (
+                <ResourceTable
+                  rows={models.slice(0, 2)}
+                  columns={modelColumns}
+                />
+              ) : null}
+            </div>
+          </CardContent>
+        </Card>
+        <Card
+          className="blackline-lab__section"
+          aria-labelledby="lab-timeline-title"
+        >
+          <CardHeader>
+            <CardTitle id="lab-timeline-title">Activity timeline</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ActivityTimeline events={activityEvents.slice(0, 2)} />
+          </CardContent>
+        </Card>
       </main>
     </TooltipProvider>
   )

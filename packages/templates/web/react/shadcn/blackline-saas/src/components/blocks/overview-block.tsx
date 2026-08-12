@@ -1,9 +1,26 @@
 import * as React from "react"
 
-import { ArrowUpRight, Check, GitBranch, Globe2, Plus, Rocket, Server, ShieldCheck } from "lucide-react"
+import {
+  ArrowUpRight,
+  Check,
+  GitBranch,
+  Globe2,
+  Plus,
+  Rocket,
+  Server,
+  ShieldCheck,
+} from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {
   Dialog,
   DialogClose,
@@ -14,7 +31,21 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 import {
   activityEvents,
@@ -22,7 +53,14 @@ import {
   projectSummary,
   type PlatformPage,
 } from "../../lib/platform-data"
-import { ActivityTimeline, PageHeader, ResourceTable, StatusBadge, SummaryStrip, type ResourceColumn } from "../patterns"
+import {
+  ActivityTimeline,
+  PageHeader,
+  ResourceTable,
+  StatusBadge,
+  SummaryStrip,
+  type ResourceColumn,
+} from "../patterns"
 
 function DeployDialog({
   open,
@@ -43,19 +81,26 @@ function DeployDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="blackline-dialog">
-        <DialogHeader className="blackline-dialog__header">
+      <DialogContent>
+        <DialogHeader>
           <DialogTitle>Deploy Atlas</DialogTitle>
         </DialogHeader>
         <form onSubmit={submit}>
           <div className="blackline-form-stack">
             <div className="blackline-field">
               <Label htmlFor="deploy-branch">Branch</Label>
-              <Input id="deploy-branch" value={branch} onChange={(event) => setBranch(event.target.value)} />
+              <Input
+                id="deploy-branch"
+                value={branch}
+                onChange={(event) => setBranch(event.target.value)}
+              />
             </div>
             <div className="blackline-field">
               <Label htmlFor="deploy-environment">Environment</Label>
-              <Select value={environment} onValueChange={(value) => value && setEnvironment(value)}>
+              <Select
+                value={environment}
+                onValueChange={(value) => value && setEnvironment(value)}
+              >
                 <SelectTrigger id="deploy-environment" aria-label="Environment">
                   <SelectValue>{environment}</SelectValue>
                 </SelectTrigger>
@@ -66,8 +111,10 @@ function DeployDialog({
               </Select>
             </div>
           </div>
-          <DialogFooter className="blackline-dialog__actions">
-            <DialogClose render={<Button variant="outline" type="button" />}>Cancel</DialogClose>
+          <DialogFooter>
+            <DialogClose render={<Button variant="outline" type="button" />}>
+              Cancel
+            </DialogClose>
             <Button type="submit">
               <Rocket aria-hidden="true" />
               Deploy
@@ -88,7 +135,9 @@ export function ProjectOverviewBlock({
 }) {
   const [deployOpen, setDeployOpen] = React.useState(false)
 
-  const recentDeploymentColumns: readonly ResourceColumn<(typeof deployments)[number]>[] = [
+  const recentDeploymentColumns: readonly ResourceColumn<
+    (typeof deployments)[number]
+  >[] = [
     {
       id: "status",
       header: "Status",
@@ -112,14 +161,20 @@ export function ProjectOverviewBlock({
     {
       id: "created",
       header: "Created",
-      render: (deployment) => <span className="blackline-muted">{deployment.createdAt}</span>,
+      render: (deployment) => (
+        <span className="blackline-muted">{deployment.createdAt}</span>
+      ),
     },
     {
       id: "action",
       header: <span className="sr-only">Actions</span>,
-      className: "blackline-table__actions",
+      className: "w-px text-right",
       render: () => (
-        <Button variant="ghost" size="sm" onClick={() => onNavigate?.("deployment-detail")}>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => onNavigate?.("deployment-detail")}
+        >
           View
           <ArrowUpRight aria-hidden="true" />
         </Button>
@@ -145,7 +200,11 @@ export function ProjectOverviewBlock({
         }
       />
 
-      <section className="blackline-object-bar" aria-labelledby="project-title">
+      <Card
+        className="blackline-object-bar p-4"
+        role="region"
+        aria-labelledby="project-title"
+      >
         <div className="blackline-object-bar__identity">
           <Avatar size="lg">
             <AvatarFallback>AT</AvatarFallback>
@@ -156,7 +215,11 @@ export function ProjectOverviewBlock({
           </div>
         </div>
         <div className="blackline-object-bar__actions">
-          <Button variant="outline" size="sm" onClick={() => onNavigate?.("deployment-detail")}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onNavigate?.("deployment-detail")}
+          >
             View deployment
             <ArrowUpRight aria-hidden="true" />
           </Button>
@@ -165,82 +228,168 @@ export function ProjectOverviewBlock({
             New deployment
           </Button>
         </div>
-      </section>
+      </Card>
 
       <SummaryStrip
         items={[
-          { label: "Production", value: "Ready", detail: projectSummary.productionUrl },
-          { label: "Preview", value: "3 active", detail: "Last updated 18m ago" },
+          {
+            label: "Production",
+            value: "Ready",
+            detail: projectSummary.productionUrl,
+          },
+          {
+            label: "Preview",
+            value: "3 active",
+            detail: "Last updated 18m ago",
+          },
           { label: "Deployments", value: "24", detail: "This month" },
           { label: "Build time", value: "42s", detail: "Average" },
         ]}
       />
 
       <div className="blackline-content-grid blackline-content-grid--split">
-        <section className="blackline-section" aria-labelledby="latest-deployment-title">
-          <div className="blackline-section__header">
-            <h2 id="latest-deployment-title">Latest deployment</h2>
-            <StatusBadge status="Ready" />
-          </div>
-          <div className="blackline-deployment-hero">
-            <div className="blackline-deployment-hero__title">
-              <GitBranch aria-hidden="true" />
-              <strong>main</strong>
-              <code>{projectSummary.latestCommit}</code>
+        <Card role="region" aria-labelledby="latest-deployment-title">
+          <CardHeader>
+            <CardTitle id="latest-deployment-title">
+              Latest deployment
+            </CardTitle>
+            <CardAction>
+              <StatusBadge status="Ready" />
+            </CardAction>
+          </CardHeader>
+          <CardContent>
+            <div className="blackline-deployment-hero">
+              <div className="blackline-deployment-hero__title">
+                <GitBranch aria-hidden="true" />
+                <strong>main</strong>
+                <code>{projectSummary.latestCommit}</code>
+              </div>
+              <span>{projectSummary.latestMessage}</span>
+              <div className="blackline-deployment-hero__meta">
+                <span>
+                  <Check aria-hidden="true" /> Production
+                </span>
+                <span>
+                  <Server aria-hidden="true" /> 42s
+                </span>
+                <span>
+                  <Globe2 aria-hidden="true" /> {projectSummary.productionUrl}
+                </span>
+              </div>
             </div>
-            <span>{projectSummary.latestMessage}</span>
-            <div className="blackline-deployment-hero__meta">
-              <span><Check aria-hidden="true" /> Production</span>
-              <span><Server aria-hidden="true" /> 42s</span>
-              <span><Globe2 aria-hidden="true" /> {projectSummary.productionUrl}</span>
-            </div>
-          </div>
-          <div className="blackline-section__footer">
-            <Button variant="outline" size="sm" onClick={() => onNavigate?.("deployment-detail")}>
+          </CardContent>
+          <CardFooter className="justify-start">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onNavigate?.("deployment-detail")}
+            >
               Inspect deployment
               <ArrowUpRight aria-hidden="true" />
             </Button>
-          </div>
-        </section>
+          </CardFooter>
+        </Card>
 
-        <section className="blackline-section" aria-labelledby="environments-title">
-          <div className="blackline-section__header">
-            <h2 id="environments-title">Environments</h2>
-            <Button variant="ghost" size="sm" onClick={() => onNavigate?.("settings")}>Manage</Button>
-          </div>
-          <div className="blackline-environment-list">
-            <div className="blackline-environment-row">
-              <div className="blackline-environment-row__name"><ShieldCheck aria-hidden="true" /><strong>Production</strong></div>
-              <StatusBadge status="Ready" />
-            </div>
-            <div className="blackline-environment-row">
-              <div className="blackline-environment-row__name"><Globe2 aria-hidden="true" /><strong>Preview</strong></div>
-              <span className="blackline-muted">3 deployments</span>
-            </div>
-            <div className="blackline-environment-row">
-              <div className="blackline-environment-row__name"><Server aria-hidden="true" /><strong>Development</strong></div>
-              <span className="blackline-muted">Local only</span>
-            </div>
-          </div>
-        </section>
+        <Card role="region" aria-labelledby="environments-title">
+          <CardHeader>
+            <CardTitle id="environments-title">Environments</CardTitle>
+            <CardAction>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onNavigate?.("settings")}
+              >
+                Manage
+              </Button>
+            </CardAction>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Environment</TableHead>
+                  <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <div className="blackline-environment-row__name">
+                      <ShieldCheck aria-hidden="true" />
+                      <strong>Production</strong>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <StatusBadge status="Ready" />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <div className="blackline-environment-row__name">
+                      <Globe2 aria-hidden="true" />
+                      <strong>Preview</strong>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    3 deployments
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <div className="blackline-environment-row__name">
+                      <Server aria-hidden="true" />
+                      <strong>Development</strong>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    Local only
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       </div>
 
-      <section className="blackline-section" aria-labelledby="recent-deployments-title">
-        <div className="blackline-section__header">
-          <h2 id="recent-deployments-title">Recent deployments</h2>
-          <Button variant="ghost" size="sm" onClick={() => onNavigate?.("deployments")}>View all</Button>
-        </div>
-        <ResourceTable rows={deployments.slice(0, 3)} columns={recentDeploymentColumns} />
-      </section>
+      <Card
+        className="gap-0"
+        role="region"
+        aria-labelledby="recent-deployments-title"
+      >
+        <CardHeader>
+          <CardTitle id="recent-deployments-title">
+            Recent deployments
+          </CardTitle>
+          <CardAction>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onNavigate?.("deployments")}
+            >
+              View all
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <ResourceTable
+          rows={deployments.slice(0, 3)}
+          columns={recentDeploymentColumns}
+        />
+      </Card>
 
-      <section className="blackline-section" aria-labelledby="activity-title">
-        <div className="blackline-section__header">
-          <h2 id="activity-title">Activity</h2>
-        </div>
-        <ActivityTimeline events={activityEvents.slice(0, 3)} />
-      </section>
+      <Card role="region" aria-labelledby="activity-title">
+        <CardHeader>
+          <CardTitle id="activity-title">Activity</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ActivityTimeline events={activityEvents.slice(0, 3)} />
+        </CardContent>
+      </Card>
 
-      <DeployDialog open={deployOpen} onOpenChange={setDeployOpen} onDeploy={deploy} />
+      <DeployDialog
+        open={deployOpen}
+        onOpenChange={setDeployOpen}
+        onDeploy={deploy}
+      />
     </>
   )
 }

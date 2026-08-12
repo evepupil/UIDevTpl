@@ -2,26 +2,52 @@ import { Download, MoreHorizontal } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card"
 
 import { invoices, type Invoice } from "../../lib/platform-data"
-import { PageHeader, ResourceTable, StatusBadge, SummaryStrip, type ResourceColumn } from "../patterns"
+import {
+  PageHeader,
+  ResourceTable,
+  StatusBadge,
+  SummaryStrip,
+  type ResourceColumn,
+} from "../patterns"
 
-export function BillingBlock({ onStatus }: { onStatus?: (message: string) => void }) {
+export function BillingBlock({
+  onStatus,
+}: {
+  onStatus?: (message: string) => void
+}) {
   const columns: readonly ResourceColumn<Invoice>[] = [
-    { id: "invoice", header: "Invoice", render: (invoice) => <code>{invoice.id}</code> },
+    {
+      id: "invoice",
+      header: "Invoice",
+      render: (invoice) => <code>{invoice.id}</code>,
+    },
     {
       id: "date",
       header: "Date",
       render: (invoice) => <span>{invoice.date}</span>,
     },
-    { id: "status", header: "Status", render: (invoice) => <StatusBadge status={invoice.status} /> },
-    { id: "amount", header: "Amount", className: "blackline-table__amount", render: (invoice) => <strong>{invoice.amount}</strong> },
+    {
+      id: "status",
+      header: "Status",
+      render: (invoice) => <StatusBadge status={invoice.status} />,
+    },
+    {
+      id: "amount",
+      header: "Amount",
+      className: "text-right",
+      render: (invoice) => <strong>{invoice.amount}</strong>,
+    },
     {
       id: "method",
       header: "Payment method",
       render: (invoice) => (
         <div className="blackline-customer">
-          <Avatar size="sm"><AvatarFallback>V</AvatarFallback></Avatar>
+          <Avatar size="sm">
+            <AvatarFallback>V</AvatarFallback>
+          </Avatar>
           <span>{invoice.method}</span>
         </div>
       ),
@@ -29,9 +55,14 @@ export function BillingBlock({ onStatus }: { onStatus?: (message: string) => voi
     {
       id: "actions",
       header: <span className="sr-only">Actions</span>,
-      className: "blackline-table__actions",
+      className: "w-px text-right",
       render: (invoice) => (
-        <Button variant="ghost" size="icon-sm" aria-label={`More actions for ${invoice.id}`} onClick={() => onStatus?.(`Actions for ${invoice.id}`)}>
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          aria-label={`More actions for ${invoice.id}`}
+          onClick={() => onStatus?.(`Actions for ${invoice.id}`)}
+        >
           <MoreHorizontal aria-hidden="true" />
         </Button>
       ),
@@ -43,7 +74,10 @@ export function BillingBlock({ onStatus }: { onStatus?: (message: string) => voi
       <PageHeader
         title="Billing"
         actions={
-          <Button variant="outline" onClick={() => onStatus?.("Invoice export started")}>
+          <Button
+            variant="outline"
+            onClick={() => onStatus?.("Invoice export started")}
+          >
             <Download aria-hidden="true" />
             Export
           </Button>
@@ -56,13 +90,15 @@ export function BillingBlock({ onStatus }: { onStatus?: (message: string) => voi
           { label: "Payment method", value: "Visa", detail: "Ending 4242" },
         ]}
       />
-      <section className="blackline-section blackline-section--table" aria-labelledby="invoices-title">
-        <div className="blackline-section__header">
-          <h2 id="invoices-title">Invoices</h2>
-          <span className="blackline-muted">{invoices.length} records</span>
-        </div>
+      <Card className="gap-0" role="region" aria-labelledby="invoices-title">
+        <CardHeader>
+          <CardTitle id="invoices-title">Invoices</CardTitle>
+          <CardAction>
+            <span className="blackline-muted">{invoices.length} records</span>
+          </CardAction>
+        </CardHeader>
         <ResourceTable rows={invoices} columns={columns} />
-      </section>
+      </Card>
     </>
   )
 }

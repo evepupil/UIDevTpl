@@ -1,6 +1,13 @@
 import type { ReactNode } from "react"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 import { EmptyState } from "./empty-state"
 
@@ -21,8 +28,8 @@ export function ResourceTable<T extends { id: string }>({
   emptyLabel?: string
 }) {
   return (
-    <div className="blackline-table-wrap">
-      <Table className="blackline-table">
+    <>
+      <Table className="min-w-[48rem]">
         <TableHeader>
           <TableRow>
             {columns.map((column) => (
@@ -36,7 +43,10 @@ export function ResourceTable<T extends { id: string }>({
           {rows.map((row) => (
             <TableRow key={row.id}>
               {columns.map((column) => (
-                <TableCell className={column.className} key={`${row.id}-${column.id}`}>
+                <TableCell
+                  className={column.className}
+                  key={`${row.id}-${column.id}`}
+                >
                   {column.render(row)}
                 </TableCell>
               ))}
@@ -45,6 +55,6 @@ export function ResourceTable<T extends { id: string }>({
         </TableBody>
       </Table>
       {rows.length === 0 ? <EmptyState title={emptyLabel} /> : null}
-    </div>
+    </>
   )
 }

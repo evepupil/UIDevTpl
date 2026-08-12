@@ -3,6 +3,7 @@ import * as React from "react"
 import { ArrowUpRight, GitBranch, MoreHorizontal, Rocket } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 
 import {
   deployments,
@@ -11,7 +12,13 @@ import {
   type DeploymentStatus,
   type PlatformPage,
 } from "../../lib/platform-data"
-import { FilterBar, PageHeader, ResourceTable, StatusBadge, type ResourceColumn } from "../patterns"
+import {
+  FilterBar,
+  PageHeader,
+  ResourceTable,
+  StatusBadge,
+  type ResourceColumn,
+} from "../patterns"
 
 export function DeploymentsBlock({
   onNavigate,
@@ -21,7 +28,9 @@ export function DeploymentsBlock({
   onStatus?: (message: string) => void
 }) {
   const [query, setQuery] = React.useState("")
-  const [environment, setEnvironment] = React.useState<"all" | Deployment["environment"]>("all")
+  const [environment, setEnvironment] = React.useState<
+    "all" | Deployment["environment"]
+  >("all")
   const [status, setStatus] = React.useState<"all" | DeploymentStatus>("all")
   const rows = filterDeployments(deployments, query, environment, status)
 
@@ -55,21 +64,30 @@ export function DeploymentsBlock({
       id: "branch",
       header: "Branch",
       render: (deployment) => (
-        <span className="blackline-inline-icon"><GitBranch aria-hidden="true" />{deployment.branch}</span>
+        <span className="blackline-inline-icon">
+          <GitBranch aria-hidden="true" />
+          {deployment.branch}
+        </span>
       ),
     },
     {
       id: "duration",
       header: "Duration",
-      render: (deployment) => <span className="blackline-muted">{deployment.duration}</span>,
+      render: (deployment) => (
+        <span className="blackline-muted">{deployment.duration}</span>
+      ),
     },
     {
       id: "actions",
       header: <span className="sr-only">Actions</span>,
-      className: "blackline-table__actions",
+      className: "w-px text-right",
       render: (deployment) => (
         <div className="blackline-row-actions">
-          <Button variant="ghost" size="sm" onClick={() => onNavigate?.("deployment-detail")}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onNavigate?.("deployment-detail")}
+          >
             View
             <ArrowUpRight aria-hidden="true" />
           </Button>
@@ -97,44 +115,52 @@ export function DeploymentsBlock({
           </Button>
         }
       />
-      <section className="blackline-filter-panel" aria-label="Deployment filters">
-        <FilterBar
-          query={query}
-          onQueryChange={setQuery}
-          queryLabel="Search deployments"
-          filters={[
-            {
-              label: "Environment",
-              value: environment,
-              onChange: (value) => setEnvironment(value as "all" | Deployment["environment"]),
-              options: [
-                { value: "all", label: "All environments" },
-                { value: "Production", label: "Production" },
-                { value: "Preview", label: "Preview" },
-              ],
-            },
-            {
-              label: "Status",
-              value: status,
-              onChange: (value) => setStatus(value as "all" | DeploymentStatus),
-              options: [
-                { value: "all", label: "All statuses" },
-                { value: "Ready", label: "Ready" },
-                { value: "Building", label: "Building" },
-                { value: "Failed", label: "Failed" },
-                { value: "Canceled", label: "Canceled" },
-              ],
-            },
-          ]}
+      <Card role="region" aria-label="Deployment filters">
+        <CardContent className="grid gap-4">
+          <FilterBar
+            query={query}
+            onQueryChange={setQuery}
+            queryLabel="Search deployments"
+            filters={[
+              {
+                label: "Environment",
+                value: environment,
+                onChange: (value) =>
+                  setEnvironment(value as "all" | Deployment["environment"]),
+                options: [
+                  { value: "all", label: "All environments" },
+                  { value: "Production", label: "Production" },
+                  { value: "Preview", label: "Preview" },
+                ],
+              },
+              {
+                label: "Status",
+                value: status,
+                onChange: (value) =>
+                  setStatus(value as "all" | DeploymentStatus),
+                options: [
+                  { value: "all", label: "All statuses" },
+                  { value: "Ready", label: "Ready" },
+                  { value: "Building", label: "Building" },
+                  { value: "Failed", label: "Failed" },
+                  { value: "Canceled", label: "Canceled" },
+                ],
+              },
+            ]}
+          />
+          <div className="blackline-result-line">
+            <span>{rows.length} deployments</span>
+            <span className="blackline-muted">Atlas</span>
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="gap-0" role="region" aria-label="Deployments list">
+        <ResourceTable
+          rows={rows}
+          columns={columns}
+          emptyLabel="No deployments found"
         />
-        <div className="blackline-result-line">
-          <span>{rows.length} deployments</span>
-          <span className="blackline-muted">Atlas</span>
-        </div>
-      </section>
-      <section className="blackline-section blackline-section--table" aria-label="Deployments list">
-        <ResourceTable rows={rows} columns={columns} emptyLabel="No deployments found" />
-      </section>
+      </Card>
     </>
   )
 }
