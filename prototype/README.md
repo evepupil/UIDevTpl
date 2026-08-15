@@ -1,6 +1,8 @@
-# UIDevTpl 主站布局原型
+# UIDevTpl 已废弃主站布局原型
 
-UIDevTpl Signal Desk 的低保真 HTML / CSS / JavaScript 原型，用来确认主站的信息层级、页面布局和核心功能位置。原型不追求最终视觉细节，正式站会把这些位置替换为 Next.js + shadcn/ui 组件。
+> 2026-08-15：`UIDevTpl Signal Desk` 已退出现行设计。本目录暂时保留用于盘点搜索、筛选、预览、迁移、语言、主题和移动端行为，不得作为新主站的布局、视觉或 CSS 基线。新方向确认并建立替代门禁后，本目录整体删除。
+
+历史低保真 HTML / CSS / JavaScript 原型曾用于确认主站的信息层级、页面布局和核心功能位置。当前重构边界与设计入口见[主站体验重设计](../docs/模块设计/主站体验重设计.md)，产品事实见根目录 [`PRODUCT.md`](../PRODUCT.md)。
 
 ## 打开方式
 
